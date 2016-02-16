@@ -12,7 +12,6 @@
     "postinstall": "jspm install"
   },
   "keywords": [
-    "chm",
     "header",
     "react",
     "jspm",
@@ -71,38 +70,32 @@
     },
     "configFile": "app/system.config.js",
     "dependencies": {
-      "clean-css": "npm:clean-css@^3.4.5",
-      "css": "github:systemjs/plugin-css@^0.1.13",
+      "clean-css": "npm:clean-css@3.4.5",
+      "css": "github:systemjs/plugin-css@0.1.13",
       "font-awesome": "npm:font-awesome@4.4.0",
-      "history": "npm:history@^1.12.2",
-      "jquery": "github:components/jquery@^2.1.4",
+      "history": "npm:history@1.12.2",
+      "jquery": "github:components/jquery@2.1.4",
       "lodash": "npm:lodash@3.10.1",
       "material-ui": "npm:material-ui@0.14.3",
       "materialize-css": "npm:materialize-css@0.97.2",
-      "mdi": "npm:mdi@^1.4.57",
-      "normalize.css": "github:necolas/normalize.css@^3.0.3",
-      "object-assign": "npm:object-assign@^4.0.1",
-      "react": "npm:react@^0.14.2",
-      "react-dom": "npm:react-dom@^0.14.2",
+      "mdi": "npm:mdi@1.4.57",
+      "normalize.css": "github:necolas/normalize.css@3.0.3",
+      "object-assign": "npm:object-assign@4.0.1",
+      "react": "npm:react@0.14.2",
+      "react-dom": "npm:react-dom@0.14.2",
       "react-redux": "npm:react-redux@4.0.0",
       "react-router": "npm:react-router@1.0.0-rc1",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
-      "whatwg-fetch": "npm:whatwg-fetch@^0.9.0"
+      "require-dir": "npm:require-dir@0.3.0",
+      "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@5.8.24",
       "babel-runtime": "npm:babel-runtime@5.8.24",
       "core-js": "npm:core-js@1.1.4"
-    },
-    "overrides": {
-      "npm:materialize-css@0.97.2": {
-        "main": "./dist/css/materialize.css!",
-        "defaultExtension": false,
-        "jspmNodeConversion": false
-      }
     }
   },
   "publishConfig": {
-    "registry": "http://localhost:4873/"
+    "registry": "https://npm.363-283.io/"
   }
 }
