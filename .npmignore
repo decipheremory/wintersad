@@ -1,0 +1,16 @@
+.idea
+*.log
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+.npmignore
+.gitignore
+node_modules
+jspm_packages
+coverage
+dist
+app
+system.config.js
+gulp*
+test
+karma.conf.js

@@ -1,0 +1,11 @@
+.idea
+*.log
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+node_modules
+jspm_packages
+coverage
+dist
+/lib
+/src
