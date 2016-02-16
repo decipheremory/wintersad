@@ -24,15 +24,21 @@ System.config({
     "lodash": "npm:lodash@3.10.1",
     "material-ui": "npm:material-ui@0.14.3",
     "materialize-css": "npm:materialize-css@0.97.2",
-    "mdi": "npm:mdi@1.4.57",
     "normalize.css": "github:necolas/normalize.css@3.0.3",
     "object-assign": "npm:object-assign@4.0.1",
-    "react": "npm:react@0.14.2",
-    "react-dom": "npm:react-dom@0.14.2",
-    "react-redux": "npm:react-redux@4.0.0",
-    "react-router": "npm:react-router@1.0.0-rc1",
+    "react": "npm:react@0.14.5",
+    "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.5",
+    "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.5",
+    "react-addons-test-utils": "npm:react-addons-test-utils@0.14.2",
+    "react-addons-transition-group": "npm:react-addons-transition-group@0.14.5",
+    "react-addons-update": "npm:react-addons-update@0.14.5",
+    "react-dom": "npm:react-dom@0.14.1",
+    "react-material-icons": "npm:react-material-icons@1.0.1",
+    "react-redux": "npm:react-redux@4.2.1",
+    "react-router": "npm:react-router@2.0.0-rc5",
+    "react-router-redux": "npm:react-router-redux@3.0.0",
     "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
-    "require-dir": "npm:require-dir@0.3.0",
+    "react-timeago": "npm:react-timeago@2.2.1",
     "whatwg-fetch": "npm:whatwg-fetch@0.9.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -149,14 +155,6 @@ System.config({
       "promise": "npm:promise@7.1.1",
       "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
     },
-    "npm:fbjs@0.3.2": {
-      "core-js": "npm:core-js@1.1.4",
-      "loose-envify": "npm:loose-envify@1.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "promise": "npm:promise@7.1.1",
-      "ua-parser-js": "npm:ua-parser-js@0.7.10",
-      "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
-    },
     "npm:fbjs@0.6.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -170,6 +168,15 @@ System.config({
       "deep-equal": "npm:deep-equal@1.0.1",
       "invariant": "npm:invariant@2.2.0",
       "qs": "npm:qs@4.0.0",
+      "warning": "npm:warning@2.1.0"
+    },
+    "npm:history@2.0.0": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "deep-equal": "npm:deep-equal@1.0.1",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "invariant": "npm:invariant@2.2.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "query-string": "npm:query-string@3.0.0",
       "warning": "npm:warning@2.1.0"
     },
     "npm:https-browserify@0.0.0": {
@@ -255,18 +262,14 @@ System.config({
       "lodash.merge": "npm:lodash.merge@3.3.2",
       "lodash.throttle": "npm:lodash.throttle@3.0.4",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.2",
-      "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.7",
-      "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.7",
-      "react-addons-transition-group": "npm:react-addons-transition-group@0.14.7",
-      "react-addons-update": "npm:react-addons-update@0.14.7",
-      "react-dom": "npm:react-dom@0.14.2",
+      "react": "npm:react@0.14.5",
+      "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.5",
+      "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.5",
+      "react-addons-transition-group": "npm:react-addons-transition-group@0.14.5",
+      "react-addons-update": "npm:react-addons-update@0.14.5",
+      "react-dom": "npm:react-dom@0.14.1",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
       "warning": "npm:warning@2.1.0"
-    },
-    "npm:materialize-css@0.97.2": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"
@@ -284,43 +287,58 @@ System.config({
     "npm:punycode@1.3.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:react-addons-create-fragment@0.14.7": {
-      "react": "npm:react@0.14.7"
+    "npm:query-string@3.0.0": {
+      "strict-uri-encode": "npm:strict-uri-encode@1.1.0"
     },
-    "npm:react-addons-pure-render-mixin@0.14.7": {
-      "react": "npm:react@0.14.7"
+    "npm:react-addons-create-fragment@0.14.5": {
+      "react": "npm:react@0.14.5"
     },
-    "npm:react-addons-transition-group@0.14.7": {
-      "react": "npm:react@0.14.7"
+    "npm:react-addons-pure-render-mixin@0.14.5": {
+      "react": "npm:react@0.14.5"
     },
-    "npm:react-addons-update@0.14.7": {
-      "react": "npm:react@0.14.7"
+    "npm:react-addons-test-utils@0.14.2": {
+      "react": "npm:react@0.14.5"
     },
-    "npm:react-dom@0.14.2": {
-      "react": "npm:react@0.14.2"
+    "npm:react-addons-transition-group@0.14.5": {
+      "react": "npm:react@0.14.5"
     },
-    "npm:react-redux@4.0.0": {
+    "npm:react-addons-update@0.14.5": {
+      "react": "npm:react@0.14.5"
+    },
+    "npm:react-dom@0.14.1": {
+      "react": "npm:react@0.14.5"
+    },
+    "npm:react-material-icons@1.0.1": {
+      "material-ui": "npm:material-ui@0.14.3",
+      "react": "npm:react@0.14.5"
+    },
+    "npm:react-redux@4.2.1": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
       "invariant": "npm:invariant@2.2.0",
+      "lodash": "npm:lodash@4.4.0",
+      "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.2",
+      "react": "npm:react@0.14.5",
       "redux": "npm:redux@3.3.1"
     },
-    "npm:react-router@1.0.0-rc1": {
-      "history": "npm:history@1.12.2",
+    "npm:react-router@2.0.0-rc5": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "history": "npm:history@2.0.0",
       "invariant": "npm:invariant@2.2.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
       "warning": "npm:warning@2.1.0"
     },
     "npm:react-tap-event-plugin@0.2.1": {
       "fbjs": "npm:fbjs@0.2.1",
-      "react": "npm:react@0.14.2"
+      "react": "npm:react@0.14.5"
     },
-    "npm:react@0.14.2": {
+    "npm:react-timeago@2.2.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.5"
+    },
+    "npm:react@0.14.5": {
       "envify": "npm:envify@3.4.0",
-      "fbjs": "npm:fbjs@0.3.2",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:react@0.14.7": {
       "fbjs": "npm:fbjs@0.6.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -338,11 +356,6 @@ System.config({
       "lodash": "npm:lodash@4.4.0",
       "lodash-es": "npm:lodash-es@4.4.0",
       "loose-envify": "npm:loose-envify@1.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:require-dir@0.3.0": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:source-map@0.1.31": {
@@ -366,9 +379,6 @@ System.config({
     "npm:through@2.3.8": {
       "process": "github:jspm/nodelibs-process@0.1.2",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
-    },
-    "npm:ua-parser-js@0.7.10": {
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:url@0.10.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

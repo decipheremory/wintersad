@@ -45,10 +45,12 @@ const App = React.createClass({
         notifications={messages}
         defaultContext={defaultContext}
         searchDisabled={false}
+        toolbarDisabled={false}
       />
       </div>
     );
   }
 });
+
 
 ReactDOM.render(<App />, document.getElementById('app'));
