@@ -13,16 +13,8 @@ System.config({
   },
 
   map: {
-    "angular": "github:angular/bower-angular@1.2.29",
-    "angular-bootstrap": "github:angular-ui/bootstrap-bower@0.14.3",
-    "angular-resource": "npm:angular-resource@1.2.28",
-    "angular-route": "npm:angular-route@1.2.28",
-    "angular-ui-select2": "github:angular-ui/ui-select2@0.0.5",
     "babel": "npm:babel-core@5.8.24",
     "babel-runtime": "npm:babel-runtime@5.8.24",
-    "bindonce": "github:Pasvaz/bindonce@0.3.3",
-    "bootstrap": "github:twbs/bootstrap@3.3.6",
-    "capco-ui-angular": "npm:capco-ui-angular@1.9.0",
     "clean-css": "npm:clean-css@3.4.5",
     "core-js": "npm:core-js@1.1.4",
     "css": "github:systemjs/plugin-css@0.1.13",
@@ -41,13 +33,7 @@ System.config({
     "react-router": "npm:react-router@1.0.0-rc1",
     "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
     "require-dir": "npm:require-dir@0.3.0",
-    "select2": "github:select2/select2@3.5.4",
-    "systemjs/plugin-css": "github:systemjs/plugin-css@0.1.13",
     "whatwg-fetch": "npm:whatwg-fetch@0.9.0",
-    "github:angular-ui/ui-select2@0.0.5": {
-      "angular": "github:angular/bower-angular@1.2.29",
-      "select2": "github:select2/select2@3.5.4"
-    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -92,13 +78,6 @@ System.config({
     "github:necolas/normalize.css@3.0.3": {
       "css": "github:systemjs/plugin-css@0.1.13"
     },
-    "github:select2/select2@3.5.4": {
-      "css": "github:systemjs/plugin-css@0.1.13",
-      "jquery": "npm:jquery@2.2.0"
-    },
-    "github:twbs/bootstrap@3.3.6": {
-      "jquery": "github:components/jquery@2.1.4"
-    },
     "npm:amdefine@1.0.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "module": "github:jspm/nodelibs-module@0.1.0",
@@ -122,10 +101,6 @@ System.config({
       "ieee754": "npm:ieee754@1.1.6",
       "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:capco-ui-angular@1.9.0": {
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:clean-css@3.4.5": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

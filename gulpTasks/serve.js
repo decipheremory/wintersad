@@ -30,12 +30,23 @@ var serverOptions = {
 };
 
 // Start local dev server.
+// gulp.task('serve', function(done) {
+//   runSeq('clean', ['html', 'js'], 'watch', function() {
+//     _browserSync = browserSync.create('Dev Server');
+//     return _browserSync.init(serverOptions, done);
+//   });
+// });
+
 gulp.task('serve', function(done) {
-  runSeq('clean', ['html', 'js'], 'watch', function() {
+  global.buildMode = false;
+
+  var sequence = ['buildImgs', 'html', 'fonts', 'copyFontsFromJspmModules', 'icons', 'js'];
+  runSeq('clean', sequence, 'watch', function() {
     _browserSync = browserSync.create('Dev Server');
     return _browserSync.init(serverOptions, done);
   });
 });
+
 
 gulp.task('browserSync-reload', function(done) {
   _browserSync.reload();

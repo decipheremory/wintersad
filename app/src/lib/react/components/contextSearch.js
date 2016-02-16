@@ -48,7 +48,7 @@ class ContextSearch extends React.Component {
     // TODO: implement callback here...
   }
 
-  _renderMenuItems(sources, external) {    
+  _renderMenuItems(sources, external) {
     let fSources = _.reject(sources, function(src){
       return external ? !src.external : src.external;
     });
@@ -116,7 +116,7 @@ class ContextSearch extends React.Component {
             value="all"
             leftIcon={
               <FontIcon>
-                <img style={styles.icon} src={'img/ChimeraLogo_v3_blk_256x256.png'} />
+                <img style={styles.icon} src={'lib/img/ChimeraLogo_v3_blk_256x256.png'} />
               </FontIcon>
             }
             primaryText="Search All Chimera"
@@ -140,7 +140,7 @@ class ContextSearch extends React.Component {
           tooltip="Search"
           style={styles.icon}
         >
-          <img src={'img/help.png'} />
+          <img src={'lib/img/help.png'} />
         </IconButton>
       </div>
     );

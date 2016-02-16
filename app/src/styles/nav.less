@@ -1,0 +1,64 @@
+// nav.less
+
+@import 'helpers';
+
+@bg-color: #444;
+@nav-height: 55px;
+
+.corius-nav {
+  .position(absolute, 0, auto, auto, 0, 100%, @nav-height);
+
+  h1 {
+    float: left;
+    margin: 0 20px;
+    font-size: 2em;
+    font-weight: 100;
+    line-height: @nav-height;
+    color: #fff;
+  }
+
+  nav {
+    height: inherit;
+    background-color: @bg-color;
+  }
+
+  nav a {
+    display: block;
+    float: left;
+    height: 100%;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: 200;
+    line-height: @nav-height;
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      color: #fff;
+      background-color: #595959;
+    }
+  }
+
+  .display-name {
+    .position(absolute, 0, 20px, auto, auto);
+    line-height: @nav-height;
+    color: #fff;
+  }
+}
+
+.notification-dropdown-title {
+  padding: 16px;
+}
+
+
+.corius-materialize-nav .brand-logo {
+  position: relative;
+  float: left;
+}
+
+.corius-materialize-nav .text:hover {
+  background-color: transparent;
+}
+
+.corius-materialize .dropdown-content .corius-no-hover:hover {
+  background-color: transparent;
+}

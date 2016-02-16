@@ -36,7 +36,7 @@ class UserExport extends React.Component {
           tooltip="Export"
           style={styles.icon}
         >
-          <img src={'img/export.png'} />
+          <img src={'lib/img/export.png'} />
         </IconButton>
       </Badge>
     );

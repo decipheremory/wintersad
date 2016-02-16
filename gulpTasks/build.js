@@ -1,17 +1,23 @@
 'use strict';
 
 var gulp = require('gulp');
+var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 var del = require('del');
+var imagemin = require('gulp-imagemin');
+var minifyCss = require('gulp-minify-css');
+var minifyHtml = require('gulp-minify-html');
+var pngquant = require('imagemin-pngquant');
+var replace = require('gulp-replace');
 var runSeq = require('run-sequence');
 var util = require('gulp-util');
 
 // One build task to rule them all.
 gulp.task('build', function(done) {
   global.buildMode = true;
-  runSeq('clean', ['buildPrep', 'buildJs'], done);
+  runSeq('clean', ['buildImgs', 'buildPrep', 'buildJs'], done);
 });
 
 // Execute any preparation steps before the build runs.
@@ -25,12 +31,12 @@ gulp.task('buildPrep', function() {
 gulp.task('buildJs', function(done) {
   // execute script in package.json
   var child = spawn('npm', ['run', 'buildJs']);
-  
+
   // print stdout to screen
-  child.stdout.on('data', function(data) { 
+  child.stdout.on('data', function(data) {
     process.stdout.write(data.toString());
   });
-  
+
   // print stderr to screen
   child.stderr.on('data', function(data) {
     process.stdout.write(data.toString());
@@ -40,6 +46,17 @@ gulp.task('buildJs', function(done) {
     logMessage('Finished building JS.');
     done();
   });
+});
+
+// Build images for distribution.
+gulp.task('buildImgs', function() {
+  return gulp.src(global.paths.imgSrc)
+    .pipe(imagemin({
+      progressive: true,
+      svgoPlugins: [{removeViewBox: false}],
+      use: [pngquant()]
+    }))
+    .pipe(gulp.dest(global.paths.imgDist));
 });
 
 // Combine all CSS (vendor and source) for distribution.

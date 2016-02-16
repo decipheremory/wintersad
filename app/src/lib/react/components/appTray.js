@@ -87,7 +87,7 @@ class AppTray extends React.Component {
           iconStyle={styles.logo}
           onTouchTap={this._handleAppTrayOpen}
         >
-          <img src={'img/ChimeraLogo_v3_white_200x200.png'} />
+          <img src={'lib/img/ChimeraLogo_v3_white_200x200.png'} />
         </IconButton>
 
         <Popover

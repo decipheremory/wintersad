@@ -1,0 +1,18 @@
+// helpers.less
+
+.position(@pos; @top: auto; @right: auto; @bottom: auto; @left: auto; @width: auto; @height: auto) {
+  position: @pos;
+  top: @top;
+  right: @right;
+  bottom: @bottom;
+  left: @left;
+  width: @width;
+  height: @height;
+}
+
+.transition(@prop, @speed, @duration) {
+  -webkit-transition: @prop @speed @duration;
+  -moz-transition: @prop @speed @duration;
+  -o-transition: @prop @speed @duration;
+  transition: @prop @speed @duration;
+}

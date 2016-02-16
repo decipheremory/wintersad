@@ -16,10 +16,11 @@ var requireDir = require('require-dir');
 
 // Specify paths & globbing patterns for tasks.
 global.paths = {
+
   // HTML sources.
   html: './app/*.html',
   // App sources.
-  appSrc: './app/src/**/*.js',  
+  appSrc: './app/src/**/*.js',
   // Source files only.
   src: './app/src/lib/**/*.js',
   // Src output.
@@ -28,6 +29,17 @@ global.paths = {
   libSrc: './app/src/lib/**/*.js',
   // Lib output.
   libOutput: './lib',
+
+  // Fonts
+  fontsSrc: './app/src/fonts/**/*',
+  fontsDist: './dist/lib/fonts',
+  // Images
+  imgSrc: './app/src/img/*',
+  imgDist: './dist/lib/img',
+  // Icons
+  iconsSrc: './app/src/icons/**/*',
+  iconsDist: './dist/lib/icons',
+
   // Distribution folder.
   dist: './dist'
 };
@@ -42,4 +54,3 @@ global.onError = function (error) {
   console.log(error.toString());
   this.emit('end');
 }
-

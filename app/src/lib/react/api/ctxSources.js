@@ -1,7 +1,7 @@
 // ctxSources.js
 
 import {checkStatus, fetchTimeout} from './httpHelpers';
-import config from '../appConfig';
+import config from '../../../appConfig';
 import 'whatwg-fetch';
 
 /**
