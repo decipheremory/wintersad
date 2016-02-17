@@ -26,12 +26,12 @@ System.config({
     "materialize-css": "npm:materialize-css@0.97.2",
     "normalize.css": "github:necolas/normalize.css@3.0.3",
     "object-assign": "npm:object-assign@4.0.1",
-    "react": "npm:react@0.14.5",
-    "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.5",
-    "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.5",
+    "react": "npm:react@0.14.7",
+    "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.7",
+    "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.7",
     "react-addons-test-utils": "npm:react-addons-test-utils@0.14.2",
-    "react-addons-transition-group": "npm:react-addons-transition-group@0.14.5",
-    "react-addons-update": "npm:react-addons-update@0.14.5",
+    "react-addons-transition-group": "npm:react-addons-transition-group@0.14.7",
+    "react-addons-update": "npm:react-addons-update@0.14.7",
     "react-dom": "npm:react-dom@0.14.1",
     "react-material-icons": "npm:react-material-icons@1.0.1",
     "react-redux": "npm:react-redux@4.2.1",
@@ -140,15 +140,6 @@ System.config({
     "npm:domain-browser@1.1.7": {
       "events": "github:jspm/nodelibs-events@0.1.1"
     },
-    "npm:envify@3.4.0": {
-      "jstransform": "npm:jstransform@10.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "through": "npm:through@2.3.8"
-    },
-    "npm:esprima-fb@13001.1001.0-dev-harmony-fb": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
     "npm:fbjs@0.2.1": {
       "core-js": "npm:core-js@1.1.4",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -192,14 +183,6 @@ System.config({
     "npm:invariant@2.2.0": {
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:jstransform@10.1.0": {
-      "base62": "npm:base62@0.1.1",
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "esprima-fb": "npm:esprima-fb@13001.1001.0-dev-harmony-fb",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "source-map": "npm:source-map@0.1.31"
     },
     "npm:lodash._createassigner@3.1.1": {
       "lodash._bindcallback": "npm:lodash._bindcallback@3.0.1",
@@ -246,7 +229,7 @@ System.config({
     "npm:lodash@3.10.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:lodash@4.4.0": {
+    "npm:lodash@4.5.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -262,11 +245,11 @@ System.config({
       "lodash.merge": "npm:lodash.merge@3.3.2",
       "lodash.throttle": "npm:lodash.throttle@3.0.4",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.5",
-      "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.5",
-      "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.5",
-      "react-addons-transition-group": "npm:react-addons-transition-group@0.14.5",
-      "react-addons-update": "npm:react-addons-update@0.14.5",
+      "react": "npm:react@0.14.7",
+      "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.7",
+      "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.7",
+      "react-addons-transition-group": "npm:react-addons-transition-group@0.14.7",
+      "react-addons-update": "npm:react-addons-update@0.14.7",
       "react-dom": "npm:react-dom@0.14.1",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
       "warning": "npm:warning@2.1.0"
@@ -290,35 +273,35 @@ System.config({
     "npm:query-string@3.0.0": {
       "strict-uri-encode": "npm:strict-uri-encode@1.1.0"
     },
-    "npm:react-addons-create-fragment@0.14.5": {
-      "react": "npm:react@0.14.5"
+    "npm:react-addons-create-fragment@0.14.7": {
+      "react": "npm:react@0.14.7"
     },
-    "npm:react-addons-pure-render-mixin@0.14.5": {
-      "react": "npm:react@0.14.5"
+    "npm:react-addons-pure-render-mixin@0.14.7": {
+      "react": "npm:react@0.14.7"
     },
     "npm:react-addons-test-utils@0.14.2": {
-      "react": "npm:react@0.14.5"
+      "react": "npm:react@0.14.7"
     },
-    "npm:react-addons-transition-group@0.14.5": {
-      "react": "npm:react@0.14.5"
+    "npm:react-addons-transition-group@0.14.7": {
+      "react": "npm:react@0.14.7"
     },
-    "npm:react-addons-update@0.14.5": {
-      "react": "npm:react@0.14.5"
+    "npm:react-addons-update@0.14.7": {
+      "react": "npm:react@0.14.7"
     },
     "npm:react-dom@0.14.1": {
-      "react": "npm:react@0.14.5"
+      "react": "npm:react@0.14.7"
     },
     "npm:react-material-icons@1.0.1": {
       "material-ui": "npm:material-ui@0.14.3",
-      "react": "npm:react@0.14.5"
+      "react": "npm:react@0.14.7"
     },
     "npm:react-redux@4.2.1": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
       "invariant": "npm:invariant@2.2.0",
-      "lodash": "npm:lodash@4.4.0",
+      "lodash": "npm:lodash@4.5.0",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.5",
+      "react": "npm:react@0.14.7",
       "redux": "npm:redux@3.3.1"
     },
     "npm:react-router@2.0.0-rc5": {
@@ -331,14 +314,13 @@ System.config({
     },
     "npm:react-tap-event-plugin@0.2.1": {
       "fbjs": "npm:fbjs@0.2.1",
-      "react": "npm:react@0.14.5"
+      "react": "npm:react@0.14.7"
     },
     "npm:react-timeago@2.2.1": {
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.5"
+      "react": "npm:react@0.14.7"
     },
-    "npm:react@0.14.5": {
-      "envify": "npm:envify@3.4.0",
+    "npm:react@0.14.7": {
       "fbjs": "npm:fbjs@0.6.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -353,15 +335,9 @@ System.config({
       "string_decoder": "npm:string_decoder@0.10.31"
     },
     "npm:redux@3.3.1": {
-      "lodash": "npm:lodash@4.4.0",
-      "lodash-es": "npm:lodash-es@4.4.0",
+      "lodash": "npm:lodash@4.5.0",
+      "lodash-es": "npm:lodash-es@4.5.0",
       "loose-envify": "npm:loose-envify@1.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:source-map@0.1.31": {
-      "amdefine": "npm:amdefine@1.0.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:source-map@0.4.4": {
@@ -375,10 +351,6 @@ System.config({
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
-    },
-    "npm:through@2.3.8": {
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
     "npm:url@0.10.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

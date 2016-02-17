@@ -9,6 +9,8 @@ import AppIcon from '../components/appIcon';
 import Dispatcher from '../api/dispatcher';
 import HeaderMgr from '../mgrs/headerMgr';
 
+
+
 class AppTray extends React.Component {
   constructor(props) {
     super(props);
@@ -87,7 +89,7 @@ class AppTray extends React.Component {
           iconStyle={styles.logo}
           onTouchTap={this._handleAppTrayOpen}
         >
-          <img src={'lib/img/ChimeraLogo_v3_white_200x200.png'} />
+          <img src={'./lib/img/ChimeraLogo_v3_white_200x200.png'} />
         </IconButton>
 
         <Popover

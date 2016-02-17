@@ -116,7 +116,7 @@ class ContextSearch extends React.Component {
             value="all"
             leftIcon={
               <FontIcon>
-                <img style={styles.icon} src={'lib/img/ChimeraLogo_v3_blk_256x256.png'} />
+                <img style={styles.icon} src={'./lib/img/ChimeraLogo_v3_blk_256x256.png'} />
               </FontIcon>
             }
             primaryText="Search All Chimera"
@@ -140,7 +140,7 @@ class ContextSearch extends React.Component {
           tooltip="Search"
           style={styles.icon}
         >
-          <img src={'lib/img/help.png'} />
+          <img src={'./lib/img/help.png'} />
         </IconButton>
       </div>
     );

@@ -1,7 +1,6 @@
 // header.js
 
 import React from 'react';
-// import { Link } from 'react-router';
 
 import { AppBar } from 'material-ui';
 
@@ -16,6 +15,95 @@ import ContextSearch from '../components/ContextSearch';
 import UserExport from '../components/UserExport';
 import UserProfile from '../components/UserProfile';
 import UserNotification from '../components/UserNotification';
+
+
+// export default React.createClass({
+//
+//   propTypes: {
+//     user: PropTypes.object,
+//     notifications: PropTypes.array,
+//     exports: PropTypes.array,
+//     defaultContext: PropTypes.string.isRequired,
+//     searchDisabled: PropTypes.bool,
+//     toolbarDisabled: PropTypes.bool
+//   },
+//
+//   getInitialState() {
+//     return {
+//       styles: {
+//         header: {
+//           backgroundColor: '#444',
+//           height: 55
+//         },
+//         userDisplay: {
+//           color: '#FFF'
+//         },
+//         search: {
+//           margin: 'auto',
+//           position: 'absolute',
+//           left: '20%',
+//           top: 10
+//         },
+//         toolbar: {
+//
+//         },
+//         toolbarTitle: {
+//           fontSize: 16,
+//           height: 'inherit',
+//         }
+//       }
+//     };
+//   },
+//
+//   getDefaultProps() {
+//     return {
+//       user: {},
+//       notifications: [],
+//       exports: [],
+//       defaultContext: '',
+//       searchDisabled: false,
+//       toolbarDisabled: false
+//     };
+//   },
+//
+//   render() {
+//     const { user, exports, notifications, defaultContext, searchDisabled, toolbarDisabled } = this.props;
+//     return (
+//       <div>
+//       <AppBar
+//         style={styles.header}
+//         title="Chimera"
+//         iconElementLeft={
+//           <div>
+//             <AppTray />
+//           </div>
+//         }
+//         iconElementRight={
+//           <div>
+//             <label style={styles.userDisplay}>{user.displayName}</label>
+//             <UserProfile user={user} />
+//             <UserExport exports={exports} />
+//             <UserNotification notifications={notifications} />
+//           </div>
+//         }
+//       >
+//       {!searchDisabled &&
+//         <div style={styles.search}>
+//           <ContextSearch
+//             defaultSource={defaultContext}
+//           />
+//         </div>
+//       }
+//       </AppBar>
+//       {!toolbarDisabled &&
+//         <Toolbar style={styles.toolbar}>
+//           <ToolbarTitle style={styles.toolbarTitle} text={defaultContext.toUpperCase()} />
+//         </Toolbar>
+//       }
+//       </div>
+//     );
+//   }
+// });
 
 
 
@@ -101,6 +189,7 @@ Header.defaultProps = {
   user: {},
   notifications: [],
   exports: [],
+  defaultContext: '',
   searchDisabled: false,
   toolbarDisabled: false
 };
