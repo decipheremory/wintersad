@@ -1,6 +1,6 @@
 {
   "name": "chimera-header-web-ui",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "A NPM module that provides a standarized data driven Chimera application header module.",
   "main": "index.js",
   "scripts": {
@@ -123,6 +123,6 @@
     }
   },
   "publishConfig": {
-    "registry": "https://npm.363-283.io/"
+    "registry": "http://localhost:4873/"
   }
 }

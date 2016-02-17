@@ -2,12 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Header from './lib/react/components/header';
+import appConfig from 'appConfig';
 
 const App = React.createClass({
-
-  // getInitialState() {
-  //
-  // },
 
   render() {
 

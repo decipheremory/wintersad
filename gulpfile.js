@@ -29,15 +29,19 @@ global.paths = {
   libSrc: './app/src/lib/**/*.js',
   // Lib output.
   libOutput: './lib',
+  // Assets sources
+  assetSrc: './app/src/lib/assets/**/*.*',
+  // Assets output
+  assetOutput: './src',
 
   // Fonts
-  fontsSrc: './app/src/fonts/**/*',
+  fontsSrc: './app/src/lib/assets/fonts/**/*',
   fontsDist: './dist/lib/fonts',
   // Images
-  imgSrc: './app/src/img/*',
+  imgSrc: './app/src/lib/assets/img/*',
   imgDist: './dist/lib/img',
   // Icons
-  iconsSrc: './app/src/icons/**/*',
+  iconsSrc: './app/src/lib/assets/icons/**/*',
   iconsDist: './dist/lib/icons',
 
   // Distribution folder.

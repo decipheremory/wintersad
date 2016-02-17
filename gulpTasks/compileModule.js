@@ -5,7 +5,7 @@ var gulpBabel = require('gulp-babel');
 var runSeq = require('run-sequence');
 
 gulp.task('compileModule', function() {
-  runSeq('clean', ['compileLib', 'copySrc']);
+  runSeq('clean', ['compileLib', 'copySrc', 'copyAssets']);
 });
 
 gulp.task('compileLib', function() {
@@ -20,4 +20,10 @@ gulp.task('copySrc', function() {
   return gulp
     .src(global.paths.src)
     .pipe(gulp.dest(global.paths.srcOutput));
+});
+
+gulp.task('copyAssets', function() {
+  return gulp
+    .src(global.paths.assetSrc)
+    .pipe(gulp.dest(global.paths.libOutput));
 });

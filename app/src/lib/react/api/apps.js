@@ -1,7 +1,7 @@
 // apps.js
 
 import {checkStatus, fetchTimeout} from './httpHelpers';
-import config from '../../../appConfig';
+import config from '../../headerConfig';
 import 'whatwg-fetch';
 
 /**

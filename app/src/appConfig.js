@@ -14,8 +14,6 @@ import 'font-awesome';
 
 export default {
   userServiceEndpoint: 'https://chm.363-283.io/service/userservice/1.0',
-  appServiceEndpoint: '/appservice',
-  csxProxyServiceEndpoint: '/csxproxyservice',
   requestTimeout: 15000
 };
 
