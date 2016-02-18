@@ -1,5 +1,6 @@
 // userNotification.js
 
+import _ from 'lodash';
 import React from 'react';
 import Badge from 'material-ui/lib/badge';
 import IconButton from 'material-ui/lib/icon-button';
@@ -18,18 +19,22 @@ class UserNotification extends React.Component {
       notifications: []
     };
     this._renderMessages = this._renderMessages.bind(this);
-    this._onNotificationsChange = this._onNotificationsChange.bind(this);
-    Dispatcher.subscribe('userNotifications', this._onNotificationsChange, this);
+    this._onCurrentUserChange = this._onCurrentUserChange.bind(this);
+    Dispatcher.subscribe('currentUserChanged', this._onCurrentUserChange, this);
   }
 
-  _onNotificationsChange(eventObj) {
-    console.log(eventObj);
+  _onCurrentUserChange(eventObj) {
+    console.log(eventObj.data.toJS().user);
     this.setState({
-      notifications: eventObject.data
-    })
+      notifications: eventObject.data.toJS().user.messages
+    });
+    _renderMessages();
   }
 
   _renderMessages() {
+
+    console.log(this.state.notifications);
+
     const { notifications } = this.props;
     return notifications.map(function(notification, index) {
       let iconType = notification.type === 'warning' ? 'warning' : 'error';
@@ -44,6 +49,9 @@ class UserNotification extends React.Component {
   }
 
   render() {
+
+    console.log(this.state.notifications);
+
     const { notifications } = this.props;
     const styles = {
       anchorOrigin: {
