@@ -155,6 +155,23 @@ gulp.task('serve', function(done) {
 });
 ```
 
+Also add task call to the **build.js** file
+
+```js
+// One build task to rule them all.
+gulp.task('build', function(done) {
+  global.buildMode = true;
+
+  var preBuild = ['buildPrep'];
+  var build = ['buildImgs', 'indexHtml', 'buildJs', 'fonts', 'copyFontsFromJspmModules', 'copyImagesFromJspmModules'];
+  var postBuild = ['combineCss'];
+
+  build.push('icons');
+
+  runSeq('clean', preBuild, build, 'rewriteBundledCssUrlsForJspmFonts', postBuild, done);
+});
+```
+
 ## Contribute
 
 The main goal of the header ui module is to help to ensure UI/UX consistency between all Chimera based applications. As the application evolve, so will the header module. If you're interested in helping to contribute to make the module better, it is greatly appreciated. Any feedback/issues you are having is appreciated as well.
