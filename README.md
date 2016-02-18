@@ -78,15 +78,9 @@ The module is currently published to a private NPM server at https://npm.363-283
 </html>
 ```
 
-2. Instantiate header example.
+2. To in invoke the header, you need to import the header react component.
+
 ```
-// main.js
-
-import Nav from '../components/nav';
-import React from 'react';
-
-import { connect } from 'react-redux';
-
 import Header from 'chimera-header-web-ui/lib/react/components/header';
 
 class Main extends React.Component {
@@ -135,18 +129,4 @@ class Main extends React.Component {
 
 }
 
-Main.propTypes = {
-  dispatch: React.PropTypes.func.isRequired
-};
-
-function mapStateToProps(state) {
-  const { user, dispatch } = state;
-  return {
-    user,
-    dispatch
-  };
-}
-
-const MainContainer = connect(mapStateToProps)(Main);
-export default MainContainer;
 ```
