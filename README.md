@@ -98,6 +98,63 @@ Chimera header module currently utilized a lot of the materialized icons. Thus p
 <link rel="stylesheet" href="/icons/materialDesign/material-icons.css">
 ```
 
+The following will need to be done within Corius application. Need to create a **images.js** under the **gulpTasks** directory.
+
+```js
+'use strict';
+
+var path = require('path');
+var gulp = require('gulp');
+var rename = require('gulp-rename');
+var replace = require('gulp-replace');
+
+gulp.task('copyImagesFromJspmModules', function(done) {
+  return gulp.src('src/jspm_packages/**/*.{png,jpeg}')
+    .pipe(rename({dirname: ''}))
+    .pipe(gulp.dest(path.join(global.paths.imgDist, 'jspm')));
+});
+```
+
+This task copies the necessary image assets to the **dist/img/jspm** directory where references to the source could be relative within the application.
+
+Add the task call to the **serve.js** file
+
+```js
+// Start local dev server.
+gulp.task('serve', function(done) {
+  global.buildMode = false;
+
+  var sequence = ['indexHtml', 'fonts', 'systemJsConfig', 'less', 'icons', 'js', 'copyImagesFromJspmModules'];
+  runSeq('clean', sequence, 'watch', function() {
+    _browserSync = browserSync.create('Dev Server');
+
+    // set serverOptions here due to dependency on global.baseUrl which is
+    // set by the baseUrl task in the indexHtml task
+    var serverOptions = {
+      open: false,
+      ui: false,
+      notify: false,
+      ghostMode: false,
+      port: process.env.PORT || 9000,
+      server: {
+        baseDir: global.paths.dist,
+        routes: {
+          [global.baseUrl + 'system.config.js']: './src/system.config.js',
+          [global.baseUrl + 'jspm_packages']: './src/jspm_packages'
+        }
+      },
+      middleware: [
+        historyApiFallback({
+          historyApiFallback: true
+        })
+      ]
+    };
+
+    return _browserSync.init(serverOptions, done);
+  });
+});
+```
+
 ## Contribute
 
 The main goal of the header ui module is to help to ensure UI/UX consistency between all Chimera based applications. As the application evolve, so will the header module. If you're interested in helping to contribute to make the module better, it is greatly appreciated. Any feedback/issues you are having is appreciated as well.
