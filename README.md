@@ -1,6 +1,6 @@
 # Chimera Header Web UI
 
-Chimera Header Web UI is a NPM module that providing a federated/standardized data driven header for the Chimera application suite.
+Chimera Header Web UI is a NPM module that providing a federated/standardized data driven header for the Chimera application suite. The module currently only supports React based applications. Future milestones may support other UI framework such as AngularJS. Currently the header UI/UX was designed with heavy influence upon adopting Google's Materialized Designs specs (https://www.google.com/design/spec/material-design/introduction.html). Components such as the App Tray and Contextual Search are driven by the data provided by the backend API. The data is governed by your user token (e.g. user_dn) and is restricted to what you are allowed access to.
 
 The module is currently published to a private NPM server at https://npm.363-283.io.
 
@@ -9,13 +9,70 @@ The module is currently published to a private NPM server at https://npm.363-283
 1. [Usage](#usage)
 1. [React](#react)
 
-## Install
+## Installation
+
+To install the module just run:
+
 `npm install`
 
 ## Run the example app
+
+If you want to take a look at what the header looks like from a standalone vanilla app. Pull down the code base. Run 'npm install' and then just run gulp.
+
 `gulp`
 
-## Usage
+## Examples
+
+Below is an example of how you would integrate the header to your React based application.
+
+```js
+import Header from 'chimera-header-web-ui/lib/react/components/header';
+
+class Main extends React.Component {
+
+  render() {
+
+    const user = {
+      displayName: 'Joe Shacks',
+      profileUrl: 'https://chm.363-283.io/apps/userprofile'
+    };
+
+    const messages = [{
+      type: 'warning',
+      message: '(U) User profile does not have a phone number'
+    }, {
+      type: 'error',
+      message: '(U) User profile does not have an email address'
+    }, {
+      type: 'warning',
+      message: '(U) Please review user profile and update if necessary.'
+    }, {
+      type: 'warning',
+      message: '(U) User profile does not have a last name'
+    }, {
+      type: 'warning',
+      message: '(U) User profile does not have a first name'
+    }, {
+      type: 'warning',
+      message: '(U//FOUO) You currently have access to ORCON shared with DIA. You can update your Mission Needs profile in GIMMEE (https://gimmee.cia.ic.gov).'
+    }];
+
+    const defaultContext = 'hyperdrive';
+
+    return (
+      <div>
+        <Header
+          user={user}
+          notifications={messages}
+          defaultContext={defaultContext}
+          searchDisabled={false}
+          toolbarDisabled={false}
+        />
+      </div>
+    );
+  }
+}
+```
 
 ### React
 
@@ -76,57 +133,4 @@ The module is currently published to a private NPM server at https://npm.363-283
   <script>System.import('/js/app')</script>
 </body>
 </html>
-```
-
-2. To in invoke the header, you need to import the header react component.
-
-```
-import Header from 'chimera-header-web-ui/lib/react/components/header';
-
-class Main extends React.Component {
-
-  render() {
-
-    const user = {
-      displayName: 'Joe Shacks',
-      profileUrl: 'https://chm.363-283.io/apps/userprofile'
-    };
-
-    const messages = [{
-      type: 'warning',
-      message: '(U) User profile does not have a phone number'
-    }, {
-      type: 'error',
-      message: '(U) User profile does not have an email address'
-    }, {
-      type: 'warning',
-      message: '(U) Please review user profile and update if necessary.'
-    }, {
-      type: 'warning',
-      message: '(U) User profile does not have a last name'
-    }, {
-      type: 'warning',
-      message: '(U) User profile does not have a first name'
-    }, {
-      type: 'warning',
-      message: '(U//FOUO) You currently have access to ORCON shared with DIA. You can update your Mission Needs profile in GIMMEE (https://gimmee.cia.ic.gov).'
-    }];
-
-    const defaultContext = 'hyperdrive';
-
-    return (
-      <div>
-        <Header
-          user={user}
-          notifications={messages}
-          defaultContext={defaultContext}
-          searchDisabled={false}
-          toolbarDisabled={false}
-        />
-      </div>
-    );
-  }
-
-}
-
 ```
