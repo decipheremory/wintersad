@@ -99,3 +99,19 @@ Chimera header module currently utilized a lot of the materialized icons. Thus p
 ```
 
 ## Contribute
+
+The main goal of the header ui module is to help to ensure UI/UX consistency between all Chimera based applications. As the application evolve, so will the header module. If you're interested in helping to contribute to make the module better, it is greatly appreciated. Any feedback/issues you are having is appreciated as well.
+
+### Compile Module
+
+To compile the module before publishing to our private npm registry. Run
+
+`gulp compileModule`
+
+### Publish Module
+
+Make sure you rev up the next up version from within the `package.json` file. Then run
+
+`npm publish`
+
+The above assumes you already have your **~/.npmrc** configured proper.
