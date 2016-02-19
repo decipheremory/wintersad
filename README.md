@@ -30,47 +30,18 @@ If you want to take a look at what the header looks like from a standalone vanil
 Below is an example of how you would integrate the header to your React based application.
 
 ```js
+import appConfig from '../appConfig';
 import Header from 'chimera-header-web-ui/lib/react/components/header';
 
 class Main extends React.Component {
 
   render() {
-
-    const user = {
-      displayName: 'Joe Shacks',
-      profileUrl: 'https://chm.363-283.io/apps/userprofile'
-    };
-
-    const messages = [{
-      type: 'warning',
-      message: '(U) User profile does not have a phone number'
-    }, {
-      type: 'error',
-      message: '(U) User profile does not have an email address'
-    }, {
-      type: 'warning',
-      message: '(U) Please review user profile and update if necessary.'
-    }, {
-      type: 'warning',
-      message: '(U) User profile does not have a last name'
-    }, {
-      type: 'warning',
-      message: '(U) User profile does not have a first name'
-    }, {
-      type: 'warning',
-      message: '(U//FOUO) You currently have access to ORCON shared with DIA. You can update your Mission Needs profile in GIMMEE (https://gimmee.cia.ic.gov).'
-    }];
-
-    const defaultContext = 'hyperdrive';
-
     return (
       <div>
         <Header
-          user={user}
-          notifications={messages}
-          defaultContext={defaultContext}
-          searchDisabled={false}
-          toolbarDisabled={false}
+          user={this.props.user}
+          profileUrl={appConfig.userProfileEndpoint}
+          appId={appConfig.appId}
         />
       </div>
     );
@@ -81,10 +52,10 @@ class Main extends React.Component {
 The Header module requires a few props. Below are brief explanation as to what they are and their usage.
 
 * **user** User auth object.
-* **notification** Notification messages associated to user's account.
-* **defaultContext** Default location context. This generally set as a one time and is the name of the application.
-* **searchDisabled** Default to false. Changing the boolean to {true} will hide the contextual search component within the header.
-* **toolbarDisabled** Default to false. Changing the boolean to {true} will hide the secondary toolbar below the header.
+* **profileUrl** User Profile URL Endpoint. Please set this within the appConfig.js file as a configurable prop.
+* **appId** Application id. Please set this within the appConfig.js file as a configurable prop.
+* **searchDisabled** [Optional] Default to false. Changing the boolean to {true} will hide the contextual search component within the header.
+* **toolbarDisabled** [Optional] Default to false. Changing the boolean to {true} will hide the secondary toolbar below the header.
 
 ## Installation
 
@@ -170,6 +141,15 @@ gulp.task('build', function(done) {
 
   runSeq('clean', preBuild, build, 'rewriteBundledCssUrlsForJspmFonts', postBuild, done);
 });
+```
+
+Add the following properties to your **appConfig.js** configuration file.
+
+```js
+export default {
+  userProfileEndpoint: 'https://chm.363-283.io/apps/userprofile/',
+  appId: 'standalone-header'
+};
 ```
 
 ## Contribute
