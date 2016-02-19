@@ -15,7 +15,7 @@ gulp.task('compileLib', function() {
   var pattern = /.\/lib\/img\/.*?([^\/]+)(png)/g;
   return gulp
     .src(global.paths.src)
-    .pipe(replace(pattern, "/img/jspm/$1$2"))
+    .pipe(replace(pattern, "img/jspm/$1$2"))
     .pipe(gulp.dest(global.paths.libOutput))
     .pipe(gulpBabel())
     .on('error', global.onError)
