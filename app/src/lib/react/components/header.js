@@ -5,8 +5,6 @@ import React from 'react';
 import { AppBar } from 'material-ui';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
-import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
-import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
 
@@ -44,7 +42,7 @@ class Header extends React.Component {
       },
       toolbarTitle: {
         fontSize: 16,
-        height: 'inherit',
+        height: 'inherit'
       }
     };
 
@@ -59,10 +57,15 @@ class Header extends React.Component {
           </div>
         }
         iconElementRight={
+
           <div>
-            <label style={styles.userDisplay}>{this.props.getUserDisplayName()}</label>
+            {this.props.hasUserData() &&
+              <label style={styles.userDisplay}>{this.props.getUserDisplayName()}</label>
+            }
             <UserProfile profileUrl={profileUrl} />
-            <UserExport exports={exports} />
+            {this.props.hasUserData() &&
+              <UserExport exports={exports} />
+            }
             {this.props.hasUserData() &&
               <UserNotification user={user} />
             }
