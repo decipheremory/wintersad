@@ -1,6 +1,7 @@
 // userNotification.js
 
 import _ from 'lodash';
+import { Map } from 'immutable';
 import React from 'react';
 import Badge from 'material-ui/lib/badge';
 import IconButton from 'material-ui/lib/icon-button';
@@ -15,44 +16,33 @@ import Dispatcher from '../api/dispatcher.js';
 class UserNotification extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      notifications: []
-    };
     this._renderMessages = this._renderMessages.bind(this);
-    this._onCurrentUserChange = this._onCurrentUserChange.bind(this);
-    Dispatcher.subscribe('currentUserChanged', this._onCurrentUserChange, this);
-  }
-
-  _onCurrentUserChange(eventObj) {
-    console.log(eventObj.data.toJS().user);
-    this.setState({
-      notifications: eventObject.data.toJS().user.messages
-    });
-    _renderMessages();
   }
 
   _renderMessages() {
 
-    console.log(this.state.notifications);
-
-    const { notifications } = this.props;
-    return notifications.map(function(notification, index) {
-      let iconType = notification.type === 'warning' ? 'warning' : 'error';
+    if(this.props.user.getIn(['user', 'messages']).size > 0) {
+      return this.props.user.getIn(['user', 'messages']).map(function(message, index) {
+        let iconType = message.get('type') === 'warning' ? 'warning' : 'error';
+        return (
+          <MenuItem
+            key={index}
+            primaryText={message.get('message')}
+            leftIcon={<FontIcon className="material-icons">{iconType}</FontIcon>}
+          />
+        );
+      });
+    } else {
       return (
         <MenuItem
-          key={index}
-          primaryText={notification.message}
-          leftIcon={<FontIcon className="material-icons">{iconType}</FontIcon>}
+          key={0}
+          primaryText='You have no notifications.'
         />
       );
-    });
+    }
   }
 
   render() {
-
-    console.log(this.state.notifications);
-
-    const { notifications } = this.props;
     const styles = {
       anchorOrigin: {
         horizontal: 'left',
@@ -77,7 +67,7 @@ class UserNotification extends React.Component {
     };
     return(
       <Badge
-        badgeContent={notifications.length}
+        badgeContent={this.props.user.getIn(['user', 'messages']).size}
         primary={true}
         badgeStyle={styles.badgeStyle}
         style={styles.icon}
@@ -99,7 +89,7 @@ class UserNotification extends React.Component {
 }
 
 UserNotification.propTypes = {
-  notifications: React.PropTypes.array
+  user: React.PropTypes.object
 };
 
 export default UserNotification;

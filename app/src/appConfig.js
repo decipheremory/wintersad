@@ -14,6 +14,8 @@ import 'font-awesome';
 
 export default {
   userServiceEndpoint: 'https://chm.363-283.io/service/userservice/1.0',
+  userProfileEndpoint: 'https://chm.363-283.io/apps/userprofile/',
+  appId: 'standalone-header',
   requestTimeout: 15000
 };
 

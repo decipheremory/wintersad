@@ -14,22 +14,10 @@ class UserProfile extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      user: {}
-    };
-    this._onCurrentUserChange = this._onCurrentUserChange.bind(this);
-    Dispatcher.subscribe('currentUserChanged', this._onCurrentUserChange, this);
-  }
-
-  _onCurrentUserChange(eventObj) {
-    console.log(eventObj.data.toJS().user);
-    this.setState({
-      user: eventObject.data.toJS().user
-    })
   }
 
   render() {
-    const { user } = this.props;
+    const { profileUrl } = this.props;
     const styles = {
       anchorOrigin: {
         horizontal: 'left',
@@ -57,12 +45,12 @@ class UserProfile extends React.Component {
         anchorOrigin={styles.anchorOrigin}
         targetOrigin={styles.targetOrigin}
       >
-        <MenuItem>
+        <MenuItem key={0}>
           <FlatButton
             label="Edit Profile"
             labelPosition="before"
             linkButton={true}
-            href={user.profileUrl}
+            href={profileUrl}
             primary={true}
           />
         </MenuItem>
@@ -72,7 +60,7 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.propTypes = {
-  user: React.PropTypes.object.isRequired
+  profileUrl: React.PropTypes.string
 };
 
 export default UserProfile;

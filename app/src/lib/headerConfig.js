@@ -1,5 +1,5 @@
 export default {
   appServiceEndpoint: '/appservice',
-  csxProxyServiceEndpoint: '/csxproxyservice',
+  bsxServiceEndpoint: '/bsxservice',
   requestTimeout: 15000
 };

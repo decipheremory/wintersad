@@ -57,9 +57,9 @@ class AppTray extends React.Component {
   }
 
   _renderApps(apps) {
-    return apps.map(function(app) {
+    return apps.map(function(app, index) {
       return (
-        <AppIcon appItem={{
+        <AppIcon key={index} appItem={{        
           title: app.title,
           url: app.url,
           icon: app.icon

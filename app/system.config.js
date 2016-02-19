@@ -20,6 +20,7 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.13",
     "font-awesome": "npm:font-awesome@4.4.0",
     "history": "npm:history@1.12.2",
+    "immutable": "npm:immutable@3.7.5",
     "jquery": "github:components/jquery@2.1.4",
     "lodash": "npm:lodash@3.10.1",
     "material-ui": "npm:material-ui@0.14.3",

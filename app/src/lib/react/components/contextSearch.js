@@ -28,7 +28,7 @@ class ContextSearch extends React.Component {
   }
 
   componentWillMount() {
-    HeaderMgr.fetchCtxSources();
+    HeaderMgr.fetchBsxSources();
   }
 
   _onSourcesUpdate(eventObj) {
@@ -53,9 +53,10 @@ class ContextSearch extends React.Component {
       return external ? !src.external : src.external;
     });
 
-    return fSources.map(function(src) {
+    return fSources.map(function(src, index) {
       return (
         <MenuItem
+          key={index}
           value={src.id}
           leftIcon={<FontIcon className="material-icons">{src.srcIcon}</FontIcon>}
           primaryText={src.label}
@@ -148,7 +149,7 @@ class ContextSearch extends React.Component {
 }
 
 ContextSearch.propTypes = {
-  defaultSource: React.PropTypes.string.isRequired
+  defaultSource: React.PropTypes.string
 };
 
 ContextSearch.defaultProps = {

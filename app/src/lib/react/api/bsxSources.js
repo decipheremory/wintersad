@@ -8,8 +8,8 @@ import 'whatwg-fetch';
  * Async call to retrieve available apps (used to populate the appTray).
  * @return {Promise}
  */
-var getCtxSources = function() {
-  let url = `${config.csxProxyServiceEndpoint}/sources`;
+var getBsxSources = function() {
+  let url = `${config.bsxServiceEndpoint}/sources`;
 
   // Use the new 'fetch()' function instead of the old XHR method. It's important
   // to set the credentials mode to 'include' to ensure that Firefox will use a
@@ -48,4 +48,4 @@ var getCtxSources = function() {
   return promise;
 };
 
-export {getCtxSources};
+export {getBsxSources};

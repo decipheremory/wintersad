@@ -2,7 +2,7 @@
 
 import dispatcher from '../api/dispatcher';
 import {getApps} from '../api/apps';
-import {getCtxSources} from '../api/ctxSources';
+import {getCtxSources} from '../api/bsxSources';
 
 var headerMgr = {
 
@@ -46,7 +46,7 @@ var headerMgr = {
     //   });
   },
 
-  fetchCtxSources: function() {
+  fetchBsxSources: function() {
 
     // mocked stubbed data...
     const sources = [{
@@ -63,7 +63,7 @@ var headerMgr = {
 
     dispatcher.publish('searchSourcesUpdated', sources);
     //TODO uncomment below block once backend services is ready
-    // getCtxSources()
+    // getBsxSources()
     //   .then(function(results) {
     //     dispatcher.publish('searchSourcesUpdated', results.user);
     //   })
