@@ -1,7 +1,5 @@
 // userNotification.js
 
-import _ from 'lodash';
-import { Map } from 'immutable';
 import React from 'react';
 import Badge from 'material-ui/lib/badge';
 import IconButton from 'material-ui/lib/icon-button';
@@ -9,9 +7,6 @@ import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import FontIcon from 'material-ui/lib/font-icon';
 import Colors from 'material-ui/lib/styles/colors';
-
-import Dispatcher from '../api/dispatcher.js';
-
 
 class UserNotification extends React.Component {
   constructor(props) {
@@ -57,7 +52,9 @@ class UserNotification extends React.Component {
         paddingRight: 0,
         paddingBottom: 0,
         paddingLeft: 0,
-        marginRight: 10
+        marginRight: 10,
+        display: 'block',
+        float: 'left'
       },
       badgeStyle: {
         bottom: 0,

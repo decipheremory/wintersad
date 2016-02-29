@@ -18,13 +18,11 @@ System.config({
     "clean-css": "npm:clean-css@3.4.5",
     "core-js": "npm:core-js@1.1.4",
     "css": "github:systemjs/plugin-css@0.1.20",
-    "font-awesome": "npm:font-awesome@4.4.0",
     "history": "npm:history@1.12.2",
     "immutable": "npm:immutable@3.7.5",
     "jquery": "github:components/jquery@2.1.4",
     "lodash": "npm:lodash@3.10.1",
     "material-ui": "npm:material-ui@0.14.3",
-    "materialize-css": "npm:materialize-css@0.97.2",
     "normalize.css": "github:necolas/normalize.css@3.0.3",
     "object-assign": "npm:object-assign@4.0.1",
     "react": "npm:react@0.14.7",
@@ -150,9 +148,6 @@ System.config({
     "npm:fbjs@0.6.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:font-awesome@4.4.0": {
-      "css": "github:systemjs/plugin-css@0.1.20"
-    },
     "npm:graceful-readlink@1.0.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
@@ -230,7 +225,7 @@ System.config({
     "npm:lodash@3.10.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:lodash@4.5.0": {
+    "npm:lodash@4.5.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -254,10 +249,6 @@ System.config({
       "react-dom": "npm:react-dom@0.14.1",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
       "warning": "npm:warning@2.1.0"
-    },
-    "npm:materialize-css@0.97.2": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"
@@ -303,7 +294,7 @@ System.config({
     "npm:react-redux@4.2.1": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
       "invariant": "npm:invariant@2.2.0",
-      "lodash": "npm:lodash@4.5.0",
+      "lodash": "npm:lodash@4.5.1",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "react": "npm:react@0.14.7",
@@ -340,8 +331,8 @@ System.config({
       "string_decoder": "npm:string_decoder@0.10.31"
     },
     "npm:redux@3.3.1": {
-      "lodash": "npm:lodash@4.5.0",
-      "lodash-es": "npm:lodash-es@4.5.0",
+      "lodash": "npm:lodash@4.5.1",
+      "lodash-es": "npm:lodash-es@4.5.1",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },

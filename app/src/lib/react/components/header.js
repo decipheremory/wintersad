@@ -29,7 +29,13 @@ class Header extends React.Component {
         height: 55
       },
       userDisplay: {
-        color: '#FFF'
+        paddingTop: 18,
+        paddingRight: 0,
+        paddingBottom: 0,
+        paddingLeft: 0,
+        color: '#FFF',
+        display: 'block',
+        float: 'left'
       },
       search: {
         margin: 'auto',
@@ -57,18 +63,17 @@ class Header extends React.Component {
           </div>
         }
         iconElementRight={
-
           <div>
             {this.props.hasUserData() &&
               <label style={styles.userDisplay}>{this.props.getUserDisplayName()}</label>
             }
-            <UserProfile profileUrl={profileUrl} />
             {this.props.hasUserData() &&
               <UserExport exports={exports} />
             }
             {this.props.hasUserData() &&
               <UserNotification user={user} />
             }
+            <UserProfile profileUrl={profileUrl} />
           </div>
         }
       >

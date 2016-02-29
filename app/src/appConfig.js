@@ -6,11 +6,9 @@
 // use syntax like '.txt!text' to explicitly specify which plugin should load
 // a resource). For more info see http://stackoverflow.com/a/31620209/62694.
 
-import 'materialize-css';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'normalize.css';
-import 'font-awesome';
 
 export default {
   userServiceEndpoint: 'https://chm.363-283.io/service/userservice/1.0',

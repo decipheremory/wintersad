@@ -16,7 +16,9 @@ class UserExport extends React.Component {
         paddingTop: 0,
         paddingRight: 0,
         paddingBottom: 0,
-        paddingLeft: 0
+        paddingLeft: 0,
+        display: 'block',
+        float: 'left'
       },
       badge: {
         bottom: 25,
