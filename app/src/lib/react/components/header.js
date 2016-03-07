@@ -67,10 +67,10 @@ class Header extends React.Component {
             {this.props.hasUserData() &&
               <label style={styles.userDisplay}>{this.props.getUserDisplayName()}</label>
             }
-            {this.props.hasUserData() &&
+            {this.props.hasExports() &&
               <UserExport exports={exports} />
             }
-            {this.props.hasUserData() &&
+            {this.props.hasMessages() &&
               <UserNotification user={user} />
             }
             <UserProfile profileUrl={profileUrl} />
@@ -99,6 +99,7 @@ Header.propTypes = {
   searchDisabled: React.PropTypes.bool,
   toolbarDisabled: React.PropTypes.bool,
   getUserDisplayName: React.PropTypes.func,
+  hasExports: React.PropTypes.func,
   hasMessages: React.PropTypes.func,
   hasUserData: React.PropTypes.func,
   user: React.PropTypes.object,

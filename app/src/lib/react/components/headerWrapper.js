@@ -36,6 +36,10 @@ export const HeaderWrapper = ComposedComponent => {
       return this.state.user.getIn(['user', 'messages']);
     },
 
+    _hasExports() {
+      return this.state.user.getIn(['user', 'exports']);
+    },
+
     _getUserDisplayName() {
       return `${this.state.user.getIn(['user', 'userData', 'displayName'])}`;
     },
@@ -43,6 +47,7 @@ export const HeaderWrapper = ComposedComponent => {
     render() {
       return <ComposedComponent
         getUserDisplayName={() => this._getUserDisplayName()}
+        hasExports={() => this._hasExports()}
         hasMessages={() => this._hasMessages()}
         hasUserData={() => this._hasUserData()}
         user={this.state.user}

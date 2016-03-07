@@ -82,6 +82,25 @@ class AppTray extends React.Component {
       },
       label: {
         padding: 5
+      },
+      apps: {
+        position: 'relative',
+      	minHeight: 40,
+      	overflowY: 'auto',
+      	overflowX: 'hidden',
+      	width: 300
+      },
+      ul: {
+        background: '#fff',
+      	margin: 0,
+      	padding: 18,
+      	width: 264,
+      	overflow: 'hidden',
+      	listStyle: 'none'
+      },
+      hr: {
+        marginLeft: 30,
+      	marginRight: 30
       }
     };
 
@@ -103,15 +122,15 @@ class AppTray extends React.Component {
           onRequestClose={this._handleAppTrayClose}
           animation={PopoverAnimationFromTop}
         >
-          <div className="apps">
+          <div style={styles.apps}>
             {this.state.apps.length <= 0 &&
               <i style={styles.label} className="fa fa-info-circle fa-1x">You currently do not have access to any apps.</i>
             }
-            <ul className="internal-set">
+            <ul style={styles.ul}>
               {this._renderApps(this.state.apps, 'internal')}
             </ul>
-            {this.state.apps.length > 0 && <hr />}
-            <ul className="external-set">
+            {this.state.apps.length > 0 && <hr style={styles.hr} />}
+            <ul style={styles.ul}>
               {this._renderApps(this.state.apps, 'external')}
             </ul>
           </div>
