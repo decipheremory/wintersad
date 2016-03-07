@@ -40,7 +40,7 @@ class Header extends React.Component {
       search: {
         margin: 'auto',
         position: 'absolute',
-        left: '20%',
+        left: '33%',
         top: 10
       },
       toolbar: {

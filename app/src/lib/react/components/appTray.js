@@ -79,6 +79,9 @@ class AppTray extends React.Component {
         marginLeft: -5,
         width: 36,
         height: 36
+      },
+      label: {
+        padding: 5
       }
     };
 
@@ -101,10 +104,13 @@ class AppTray extends React.Component {
           animation={PopoverAnimationFromTop}
         >
           <div className="apps">
+            {this.state.apps.length <= 0 &&
+              <i style={styles.label} className="fa fa-info-circle fa-1x">You currently do not have access to any apps.</i>
+            }
             <ul className="internal-set">
               {this._renderApps(this.state.apps, 'internal')}
             </ul>
-            <hr />
+            {this.state.apps.length > 0 && <hr />}
             <ul className="external-set">
               {this._renderApps(this.state.apps, 'external')}
             </ul>

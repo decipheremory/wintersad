@@ -16,7 +16,6 @@ var headerMgr = {
         if(error.json) {
           error.json.errors.map(err => { errMsg += ` ${err.message}`; });
         }
-        invokeCallback(false, errMsg);
       });
   },
 
