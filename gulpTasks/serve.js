@@ -40,7 +40,7 @@ var serverOptions = {
 gulp.task('serve', function(done) {
   global.buildMode = false;
 
-  var sequence = ['buildImgs', 'html', 'fonts', 'copyFontsFromJspmModules', 'icons', 'js'];
+  var sequence = ['buildImgs', 'html', 'fonts', 'copyFontsFromJspmModules', 'icons', 'js', 'css'];
   runSeq('clean', sequence, 'watch', function() {
     _browserSync = browserSync.create('Dev Server');
     return _browserSync.init(serverOptions, done);

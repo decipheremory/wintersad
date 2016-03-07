@@ -43,7 +43,9 @@ global.paths = {
   // Icons
   iconsSrc: './app/src/lib/assets/icons/**/*',
   iconsDist: './dist/lib/icons',
-
+  // CSS
+  cssSrc: './app/src/lib/assets/css/**/*',
+  cssDist: './dist/lib/css',
   // Distribution folder.
   dist: './dist'
 };

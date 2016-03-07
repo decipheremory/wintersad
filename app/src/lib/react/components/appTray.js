@@ -56,15 +56,18 @@ class AppTray extends React.Component {
     });
   }
 
-  _renderApps(apps) {
+  _renderApps(apps, appType) {
     return apps.map(function(app, index) {
-      return (
-        <AppIcon key={index} appItem={{        
-          title: app.title,
-          url: app.url,
-          icon: app.icon
-        }} />
-      );
+      if(app.apptype === appType) {
+        return (
+          <AppIcon key={index} appItem={{
+            title: app.title,
+            url: app.url,
+            icon: app.icon
+          }} />
+        );
+      }
+      return null;
     });
   }
 
@@ -76,9 +79,6 @@ class AppTray extends React.Component {
         marginLeft: -5,
         width: 36,
         height: 36
-      },
-      popover: {
-        padding: 10
       }
     };
 
@@ -100,8 +100,14 @@ class AppTray extends React.Component {
           onRequestClose={this._handleAppTrayClose}
           animation={PopoverAnimationFromTop}
         >
-          <div style={styles.popover}>
-            {this._renderApps(this.state.apps)}
+          <div className="apps">
+            <ul className="internal-set">
+              {this._renderApps(this.state.apps, 'internal')}
+            </ul>
+            <hr />
+            <ul className="external-set">
+              {this._renderApps(this.state.apps, 'external')}
+            </ul>
           </div>
         </Popover>
       </div>

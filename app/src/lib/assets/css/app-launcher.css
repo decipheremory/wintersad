@@ -1,0 +1,96 @@
+.apps {
+	position: relative;
+	border-color: rgba(0,0,0,.2);
+	box-shadow: 0 2px 10px rgba(0,0,0,.2);
+	-webkit-transition: height .2s ease-in-out;
+	transition: height .2s ease-in-out;
+	min-height: 196px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 300px;
+	/*height: 396px;*/
+	/*margin-bottom: 30px;*/
+}
+
+.launcher .button {
+	cursor: pointer;
+	width: 32px;
+	margin: 0 auto;
+}
+
+.hide {
+	display: none;
+}
+
+.apps hr {
+	margin-left: 30px !important;
+	margin-right: 30px !important;
+}
+
+.apps ul {
+	background: #fff;
+	margin: 0;
+	padding: 18px;
+	width: 264px;
+	overflow: hidden;
+	list-style: none;
+}
+
+.apps ul li {
+	float: left;
+	height: 64px;
+	width: 88px;
+	color: black;
+	padding: 18px 0;
+	text-align: center;
+}
+
+.apps .more {
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	width: 320px;
+	background: #f5f5f5;
+	cursor: pointer;
+	height: 40px;
+	overflow: hidden;
+	position: absolute;
+	text-decoration: none;
+	color: #282828;
+}
+
+.apps.overflow .more {
+	border-bottom: 1px solid #ebebeb;
+	left: 28px;
+	width: 264px;
+	height: 0;
+	cursor: default;
+	height: 0;
+	outline: none;
+}
+
+::-webkit-scrollbar-thumb {
+	background-clip: padding-box;
+	background-color: rgba(0,0,0,.3);
+	border: 5px solid transparent;
+	border-radius: 10px;
+	min-height: 20px;
+	min-width: 20px;
+	height: 5px;
+	width: 5px;
+}
+
+::-webkit-scrollbar {
+	height: 15px;
+	width: 15px;
+	background: white;
+}
+
+::-webkit-scrollbar-button {
+	height: 0;
+	width: 0;
+}
+
+.fa {
+	color: #444;
+}

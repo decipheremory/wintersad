@@ -9,7 +9,9 @@ import 'whatwg-fetch';
  * @return {Promise}
  */
 var getApps = function() {
+
   let url = `${config.appServiceEndpoint}/apps`;
+
 
   // Use the new 'fetch()' function instead of the old XHR method. It's important
   // to set the credentials mode to 'include' to ensure that Firefox will use a
@@ -26,24 +28,16 @@ var getApps = function() {
   .then(checkStatus)
 
   // Response returned by checkStatus() wil be passed to this arrow function.
-  .then(response => response.json())
-
+  .then(response => {
+    return Promise.resolve(response.json());
+  });
   // response.json() returns a promise that will resolve once the JSON is parsed
   // (see https://developer.mozilla.org/en-US/docs/Web/API/Body/json). This json
   // will then be passed to the following arrow function.
-  .then(json => {
-
-    let results = {
-      apps: [],
-      rawJsonResp: json
-    };
-
-    if(json.item.apps) {
-      results.apps = json.item.apps;
-    }
-
-    return Promise.resolve(results);
-  });
+  // .then(json => {
+  //   console.log("?");
+  //   return Promise.resolve(results);
+  // });
 
   return promise;
 };

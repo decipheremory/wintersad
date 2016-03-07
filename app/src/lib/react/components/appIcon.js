@@ -14,38 +14,19 @@ class AppIcon extends React.Component {
   render() {
     const { appItem } = this.props;
     const styles = {
-      appcontainer: {
-        display: 'block',
-        float: 'left',
-        width: 90,
-        height: 90,
-        marginRight: 10,
-        marginBottom: 10
-      },
-      appicon: {
-        fontSize: 56,
-        paddingLeft: 8
-      },
-      labelStyle: {
-        fontSize: 10
+      label: {
+        fontSize: 12
       }
     };
     return(
-      <div style={styles.appcontainer}>
-        <FontIcon
-          className="material-icons"
-          style={styles.appicon}
-        >
-          {appItem.icon}
-        </FontIcon>
-        <br/>
-        <FlatButton
-          label={appItem.title}
-          labelStyle={styles.labelStyle}
-          linkButton={true}
-          href={appItem.url}
-        />
-      </div>
+      <li>
+        <a href={appItem.url}>
+          <i className={appItem.icon}>
+            <br /><label style={styles.label}>{appItem.title}</label></i>
+        </a>
+
+      </li>
+
     );
   }
 }
