@@ -12,14 +12,17 @@ class AppIcon extends React.Component {
     const { appItem } = this.props;
     const styles = {
       label: {
-        fontSize: 12
+        fontSize: 12,
+        fontFamily: 'robotolight, Helvetica Neue, Helvetica, Arial, sans-serif'
       },
       li: {
         float: 'left',
         height: 64,
-        width: 88,
-        paddingTop: 18,
-        paddingBottom: 18,
+        width: 80,
+        paddingTop: 0,
+        paddingBottom: 0,
+        // paddingTop: 18,
+        // paddingBottom: 18,
         textAlign: 'center',
         color: '#444'
       }

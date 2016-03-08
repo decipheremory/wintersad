@@ -85,22 +85,24 @@ class AppTray extends React.Component {
       },
       apps: {
         position: 'relative',
-      	minHeight: 40,
-      	overflowY: 'auto',
-      	overflowX: 'hidden',
-      	width: 300
+        minHeight: 40,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        width: 300
       },
       ul: {
         background: '#fff',
-      	margin: 0,
-      	padding: 18,
-      	width: 264,
-      	overflow: 'hidden',
-      	listStyle: 'none'
+        margin: 0,
+        padding: 18,
+        width: 300,
+        overflow: 'hidden',
+        listStyle: 'none'
       },
       hr: {
         marginLeft: 30,
-      	marginRight: 30
+        marginRight: 30,
+        marginTop: 0,
+        marginBottom: 0
       }
     };
 
