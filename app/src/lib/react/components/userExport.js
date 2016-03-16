@@ -23,7 +23,9 @@ class UserExport extends React.Component {
       badge: {
         bottom: 25,
         left: 35,
-        fontSize: 10
+        fontSize: 10,
+        textAlign: 'center',
+        paddingTop: '5px'
       }
     };
 

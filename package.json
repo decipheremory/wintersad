@@ -76,8 +76,8 @@
     "require-dir": "0.3.0",
     "run-sequence": "1.1.4"
   },
-  "jspmNodeConversion": false,
   "jspm": {
+    "jspmNodeConversion": false,
     "directories": {
       "baseURL": "app",
       "test": "test"
