@@ -21,6 +21,10 @@ class Header extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    document.getElementById('header-app-tray').parentElement.style.float = 'left';
+  }
+
   render() {
     const { user, exports, appId, profileUrl, searchDisabled, toolbarDisabled } = this.props;
     const styles = {
@@ -43,8 +47,8 @@ class Header extends React.Component {
         left: '20%',
         top: 10
       },
-      toolbar: {
-
+      title: {
+        display: 'inline-block'
       },
       toolbarTitle: {
         fontSize: 16,
@@ -57,13 +61,17 @@ class Header extends React.Component {
       <AppBar
         style={styles.header}
         title="Chimera"
+        titleStyle={styles.title}
         iconElementLeft={
-          <div>
+          <span id='header-app-tray'>
             <AppTray />
-          </div>
+          </span>
         }
+        iconStyleRight={{
+          float: 'right'
+        }}
         iconElementRight={
-          <div>
+          <span>
             {this.props.hasUserData() &&
               <label style={styles.userDisplay}>{this.props.getUserDisplayName()}</label>
             }
@@ -74,7 +82,7 @@ class Header extends React.Component {
               <UserNotification user={user} />
             }
             <UserProfile profileUrl={profileUrl} />
-          </div>
+          </span>
         }
       >
       {!searchDisabled &&
