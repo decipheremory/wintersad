@@ -59,7 +59,9 @@ class UserNotification extends React.Component {
       badgeStyle: {
         bottom: 0,
         left: 35,
-        fontSize: 10
+        fontSize: 10,
+        textAlign: 'center',
+        paddingTop: '5px'
       }
     };
     return(
