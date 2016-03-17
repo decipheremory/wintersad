@@ -9,7 +9,7 @@ import 'whatwg-fetch';
  * @return {Promise}
  */
 var getBsxSources = function() {
-  let url = `${config.bsxServiceEndpoint}/sources`;
+  let url = `${config.bsxServiceEndpoint}/data/sources`;
 
   // Use the new 'fetch()' function instead of the old XHR method. It's important
   // to set the credentials mode to 'include' to ensure that Firefox will use a
@@ -26,24 +26,11 @@ var getBsxSources = function() {
   .then(checkStatus)
 
   // Response returned by checkStatus() wil be passed to this arrow function.
-  .then(response => response.json())
+  .then(response => response.json());
 
   // response.json() returns a promise that will resolve once the JSON is parsed
   // (see https://developer.mozilla.org/en-US/docs/Web/API/Body/json). This json
   // will then be passed to the following arrow function.
-  .then(json => {
-
-    let results = {
-      searchSources: [],
-      rawJsonResp: json
-    };
-
-    if(json.item.searchSources) {
-      results.searchSources = json.item.searchSources;
-    }
-
-    return Promise.resolve(results);
-  });
 
   return promise;
 };
