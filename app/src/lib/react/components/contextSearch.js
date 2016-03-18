@@ -48,18 +48,18 @@ class ContextSearch extends React.Component {
     // TODO: implement callback here...
   }
 
-  _renderMenuItems(sources, external) {
+  _renderMenuItems(sources, internal) {
     let fSources = _.reject(sources, function(src){
-      return external ? !src.external : src.external;
+      return internal ? src.internal : !src.internal;
     });
 
     return fSources.map(function(src, index) {
       return (
         <MenuItem
-          key={index}
+          key={src.id+index}
           value={src.id}
-          leftIcon={<FontIcon className="material-icons">{src.srcIcon}</FontIcon>}
-          primaryText={src.label}
+          leftIcon={<FontIcon className="material-icons">{src.style.iconClassName}</FontIcon>}
+          primaryText={src.name}
         />
       );
     });
@@ -95,7 +95,12 @@ class ContextSearch extends React.Component {
       targetOrigin: {
         horizontal: 'left',
         vertical: 'top'
+      },
+      sourceTypeLabel: {
+        fontSize: 'small',
+        marginLeft: 10
       }
+
     };
 
     return(
@@ -122,8 +127,10 @@ class ContextSearch extends React.Component {
             }
             primaryText="Search All Chimera"
           />
+          <div style={styles.sourceTypeLabel}>Internal Data</div>
           {this._renderMenuItems(this.state.sources, false)}
           <Divider />
+          <div style={styles.sourceTypeLabel}>External Data</div>
           {this._renderMenuItems(this.state.sources, true)}
 
         </IconMenu>
