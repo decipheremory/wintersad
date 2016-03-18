@@ -111,7 +111,7 @@ class AppTray extends React.Component {
         <IconButton
           tooltip="App Tray"
           iconStyle={styles.logo}
-          onTouchTap={this._handleAppTrayOpen}
+          onClick={this._handleAppTrayOpen}
         >
           <img src={'./lib/img/ChimeraLogo_v3_white_200x200.png'} />
         </IconButton>
