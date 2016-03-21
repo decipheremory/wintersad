@@ -116,6 +116,6 @@
     }
   },
   "publishConfig": {
-    "registry": "http://localhost:4873/"
+    "registry": "https://npm.363-283.io/"
   }
 }
