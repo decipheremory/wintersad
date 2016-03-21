@@ -27,7 +27,8 @@ If you want to take a look at what the header looks like from a standalone vanil
 
 ## Examples
 
-Below is an example of how you would integrate the header to your React based application.
+### Integrating to React Based Applications
+Below is an demonstration example of how you would integrate the header to your React based application.
 
 ```js
 import appConfig from '../appConfig';
@@ -57,6 +58,148 @@ The Header module requires a few props. Below are brief explanation as to what t
 * **searchDisabled** [Optional] Default to false. Changing the boolean to {true} will hide the contextual search component within the header.
 * **toolbarDisabled** [Optional] Default to false. Changing the boolean to {true} will hide the secondary toolbar below the header.
 
+### Integrating to Angular Based Applications
+Below is an demonstration example of how you would integrate the header to your Angular based application. Because the Header module is natively
+React based, there are some additional steps needed in order to integrate to Angular applications. We will require primarily the ngReact dependency
+lib as the primary core to help facilitate the React/Angular bridge crossover.
+
+Thus, first install the ngReact lib.
+
+`jspm install npm:ngreact@^0.2.0`
+
+Once installed, look within the `src/system.config.js`. Make sure that ngReact dependency uses the **same** angular dependency version as what's installed.
+Below is an example in comparison.
+
+```js
+map: {
+  "angular": "github:angular/bower-angular@1.3.15",
+  "ngreact": "npm:ngreact@0.2.0",
+  ...
+  "npm:ngreact@0.2.0": {
+    "angular": "github:angular/bower-angular@1.3.15",
+    "react": "npm:react@0.14.7",
+    "react-dom": "npm:react-dom@0.14.1"
+  }
+  ...
+}
+```
+
+Create new HeaderController in `src/js/headerCtrl.js`. Below is bare vanilla snippet.
+
+```js
+// navCtrl.js
+
+import mainModule from '../mainModule';
+import appConfig from '../appConfig';
+
+// this is the actual React based module imported.
+import Header from 'chimera-header-web-ui/lib/react/components/header';
+
+mainModule.controller('HeaderController', ['Authentication', '$scope', function(Auth, $scope) {
+
+  // set the header module propTypes
+  $scope.header = {
+    user: {},
+    profileUrl: appConfig.userProfileEndpoint,
+    appId: appConfig.appId
+  };
+
+  Auth.onCurrentUserChange(function(currentUser) {
+    // populate the user when currentUser is available...
+    if(currentUser) {
+      $scope.header.user = currentUser.userData;
+    }
+  });
+}]);
+// load the actual React module
+mainModule.value('Header', Header);
+```
+
+Create new header view template in `src/js/templates/header.tpl.html`. Below is the snippet.
+
+```html
+<react-component name="Header" props="header" watch-depth="reference"/>
+```
+
+1. react-component is an Angular directive that delegates off to a React component.
+
+
+Within `src/js/mainModule.js` import the **ngreact** module and inject the react as part of the dependency.
+
+```js
+import 'ngreact';
+
+var mainModule = angular.module('Main', [
+  'react',
+
+  'ngCookies',
+  'ngResource',
+
+  'ngMaterial',
+  'ui.router'
+]);
+```
+
+Next, update the $stateProvider within `src/js/mainModule.js`. Below is the snippet.
+
+```js
+$stateProvider
+  .state('login', {
+    url: '/login',
+    // Note that we are excluding the 'nav' view. This will cause it
+    // to be hidden while the user is being logged in.
+    views: {
+      'content': {
+        template: loginTpl
+      }
+    }
+  })
+  .state('loginFailed', {
+    url: '/loginFailed',
+    views: {
+      'content': {
+        template: loginFailedTpl,
+        controller: ['Authentication', '$scope', function(Authentication, $scope) {
+          let errMsg = '';
+          Authentication.getErrors().map(err => { errMsg += ` ${err.message}`; });
+          $scope.errMsg = errMsg;
+        }]
+      }
+    }
+  })
+  .state('home', {
+    url: '/',
+    views: {
+      'nav': {
+        template: headerTpl,
+        controller: 'HeaderController'
+      },
+      'content': {
+        template: mainTpl,
+        controller: 'MainController'
+      }
+    }
+  })
+  .state('about', {
+    url: '/about',
+    views: {
+      'header': {
+        template: headerTpl,
+        controller: 'HeaderController'
+      },
+      'content': {
+        template: aboutTpl
+      }
+    }
+  });
+```
+
+Next, add the following app container within `src/index.html`.
+
+```html
+<div id="app"></div>
+```
+
 ## Installation
 
 Fastest way to install the module is to use jspm. From your [Corius](https://gitlab.363-283.io/cte/corius) generated app. Run
@@ -66,7 +209,8 @@ Fastest way to install the module is to use jspm. From your [Corius](https://git
 Chimera header module currently utilized a lot of the materialized icons. Thus please remember to reference the stylesheet within the index.html file. Corius based React/Material applciations should already have the lib installed. You'll just need to reference it.
 
 ```html
-<link rel="stylesheet" href="/icons/materialDesign/material-icons.css">
+<link rel="stylesheet" href="icons/materialDesign/material-icons.css">
+<link rel="stylesheet" href="icons/fontAwesome/css/font-awesome.min.css">
 ```
 
 The following will need to be done within Corius application. Need to create a **images.js** under the **gulpTasks** directory.
