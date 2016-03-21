@@ -56,15 +56,18 @@ class AppTray extends React.Component {
     });
   }
 
-  _renderApps(apps) {
+  _renderApps(apps, appType) {
     return apps.map(function(app, index) {
-      return (
-        <AppIcon key={index} appItem={{        
-          title: app.title,
-          url: app.url,
-          icon: app.icon
-        }} />
-      );
+      if(app.apptype === appType) {
+        return (
+          <AppIcon key={index} appItem={{
+            title: app.title,
+            url: app.url,
+            icon: app.icon
+          }} />
+        );
+      }
+      return null;
     });
   }
 
@@ -77,8 +80,29 @@ class AppTray extends React.Component {
         width: 36,
         height: 36
       },
-      popover: {
-        padding: 10
+      label: {
+        padding: 5
+      },
+      apps: {
+        position: 'relative',
+        minHeight: 40,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        width: 300
+      },
+      ul: {
+        background: '#fff',
+        margin: 0,
+        padding: 18,
+        width: 300,
+        overflow: 'hidden',
+        listStyle: 'none'
+      },
+      hr: {
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 0,
+        marginBottom: 0
       }
     };
 
@@ -87,7 +111,7 @@ class AppTray extends React.Component {
         <IconButton
           tooltip="App Tray"
           iconStyle={styles.logo}
-          onTouchTap={this._handleAppTrayOpen}
+          onClick={this._handleAppTrayOpen}
         >
           <img src={'./lib/img/ChimeraLogo_v3_white_200x200.png'} />
         </IconButton>
@@ -100,8 +124,17 @@ class AppTray extends React.Component {
           onRequestClose={this._handleAppTrayClose}
           animation={PopoverAnimationFromTop}
         >
-          <div style={styles.popover}>
-            {this._renderApps(this.state.apps)}
+          <div style={styles.apps}>
+            {this.state.apps.length <= 0 &&
+              <i style={styles.label} className="fa fa-info-circle fa-1x">You currently do not have access to any apps.</i>
+            }
+            <ul style={styles.ul}>
+              {this._renderApps(this.state.apps, 'internal')}
+            </ul>
+            {this.state.apps.length > 0 && <hr style={styles.hr} />}
+            <ul style={styles.ul}>
+              {this._renderApps(this.state.apps, 'external')}
+            </ul>
           </div>
         </Popover>
       </div>

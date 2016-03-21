@@ -2,9 +2,6 @@
 
 import React from 'react';
 
-import FlatButton from 'material-ui/lib/flat-button';
-import FontIcon from 'material-ui/lib/font-icon';
-
 
 class AppIcon extends React.Component {
   constructor(props) {
@@ -14,38 +11,29 @@ class AppIcon extends React.Component {
   render() {
     const { appItem } = this.props;
     const styles = {
-      appcontainer: {
-        display: 'block',
+      label: {
+        fontSize: 12,
+        fontFamily: 'robotolight, Helvetica Neue, Helvetica, Arial, sans-serif'
+      },
+      li: {
         float: 'left',
-        width: 90,
-        height: 90,
-        marginRight: 10,
-        marginBottom: 10
-      },
-      appicon: {
-        fontSize: 56,
-        paddingLeft: 8
-      },
-      labelStyle: {
-        fontSize: 10
+        height: 64,
+        width: 80,
+        paddingTop: 0,
+        paddingBottom: 0,
+        // paddingTop: 18,
+        // paddingBottom: 18,
+        textAlign: 'center',
+        color: '#444'
       }
     };
     return(
-      <div style={styles.appcontainer}>
-        <FontIcon
-          className="material-icons"
-          style={styles.appicon}
-        >
-          {appItem.icon}
-        </FontIcon>
-        <br/>
-        <FlatButton
-          label={appItem.title}
-          labelStyle={styles.labelStyle}
-          linkButton={true}
-          href={appItem.url}
-        />
-      </div>
+      <li>
+        <a href={appItem.url}>
+          <i style={styles.li} className={appItem.icon}>
+            <br /><label style={styles.label}>{appItem.title}</label></i>
+        </a>
+      </li>
     );
   }
 }
