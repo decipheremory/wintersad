@@ -15,6 +15,9 @@ import UserProfile from '../components/UserProfile';
 import UserNotification from '../components/UserNotification';
 import { HeaderWrapper } from '../components/headerWrapper';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 class Header extends React.Component {
 
   constructor(props) {
