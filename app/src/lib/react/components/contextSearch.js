@@ -10,7 +10,6 @@ import Colors from 'material-ui/lib/styles/colors';
 import Divider from 'material-ui/lib/divider';
 import Dispatcher from '../api/dispatcher';
 import HeaderMgr from '../mgrs/headerMgr';
-import config from '../../headerConfig';
 import appConfig from '../../../appConfig';
 
 
@@ -27,7 +26,6 @@ class ContextSearch extends React.Component {
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
     this._onSourcesUpdate = this._onSourcesUpdate.bind(this);
     Dispatcher.subscribe('searchSourcesUpdated', this._onSourcesUpdate.bind(this));
-
   }
 
   componentWillMount() {
@@ -70,20 +68,18 @@ class ContextSearch extends React.Component {
     let selectedSrc = this.state.valueMultiple.toString();    
     let query = this.refs.contextSearchField.getValue();
     if ( appConfig.useLegacySearch) {
-      console.log(`${config.csxProxyEndpoint}/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`);
-      // ** should be  relative links on lines 74, 80 -- remove 'https://.....io' before MR **
-    //   fetch('https://chm.383-283.io/material/#/chimera-search/search?query='+query+'&index='+selectedSrc, {
-    //     method: 'GET'
-    //   }) 
-    // .then(function(response) {
-    //   console.log(response.status);
-    //   if (response.status === 200) {
-    //     window.location.href = `${config.csxProxyEndpoint} /material/#/chimera-search/search?query=${query}&index=${selectedSrc}`;
-    //  } else {
-    //     console.log('status: ' + response.status);
-    //     alert('Server not available');
-    //    }
-    // });
+      fetch( `/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`, {
+        method: 'GET'
+      }) 
+    .then(function(response) {
+      //console.log(response.status);
+      if ( response.status >= 200 && response.status < 300 || response.status === 304 ) {
+        window.open( `/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`, '_blank');
+     } else {
+        console.log('status: ' + response.status);
+        alert('Unable to process search.');
+       }
+    });
     } else {
       console.log('work in progress');
       //TODO: implement corius search callback here...

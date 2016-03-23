@@ -1,6 +1,6 @@
 export default {
+  //remove csxProxyEndpoint and edit bsxServiceEndpoint before MR
   appServiceEndpoint: '/service/apps/1.0',
-  bsxServiceEndpoint: 'https://chm.363-283.io/service/csx/proxy/1.1',
-  csxProxyEndpoint: 'https://chm.363-283.io',
+  bsxServiceEndpoint: '/service/csx/proxy/1.1',
   requestTimeout: 15000
 };
