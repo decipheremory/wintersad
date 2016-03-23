@@ -10,7 +10,7 @@ import Colors from 'material-ui/lib/styles/colors';
 import Divider from 'material-ui/lib/divider';
 import Dispatcher from '../api/dispatcher';
 import HeaderMgr from '../mgrs/headerMgr';
-import appConfig from '../../../appConfig';
+import config from '../../headerConfig';
 
 
 class ContextSearch extends React.Component {
@@ -34,27 +34,20 @@ class ContextSearch extends React.Component {
 
   _onSourcesUpdate(eventObj) {
     var tempSources = eventObj.data;
-    var tempDefault = this.state.valueMultiple;
-    var newDefault = [];
     var sourceNameArr = [];
-    for (var i=0;i<tempSources.length;i++) {
-      sourceNameArr.push(tempSources[i].id);
-    }
-    if (tempDefault.indexOf('all') > -1) {
-      newDefault = sourceNameArr;
-    }
+    tempSources.map(function(src, index) {
+      sourceNameArr.push(src.id);
+    });
     this.setState({
       sources: eventObj.data,
-      defaultSource: sourceNameArr
+      allSources: sourceNameArr
     });
-    this._handleChangeMultiple(null, newDefault);
   }
 
   _handleChangeMultiple(event, value) {
     var selectedSources= this.state.valueMultiple;
-    //if search all is selected, we want only source names in array, not 'all'
     if (value.indexOf('all') > -1) {
-      selectedSources = this.state.defaultSource;
+      selectedSources = this.state.allSources;
     } else {
       selectedSources = value;
     }
@@ -64,24 +57,20 @@ class ContextSearch extends React.Component {
   }
 
   _handleSearchEnter() {
-    // console.log(this.refs.contextSearchField.getValue());
     let selectedSrc = this.state.valueMultiple.toString();    
     let query = this.refs.contextSearchField.getValue();
-    if ( appConfig.useLegacySearch) {
-      fetch( `/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`, {
+    if (config.useLegacySearch) {
+      fetch( `${config.csxProxyEndpoint}/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`, {
         method: 'GET'
       }) 
     .then(function(response) {
-      //console.log(response.status);
       if ( response.status >= 200 && response.status < 300 || response.status === 304 ) {
-        window.open( `/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`, '_blank');
-     } else {
-        console.log('status: ' + response.status);
+        window.open( `${config.csxProxyEndpoint}/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`, '_blank');
+      } else {
         alert('Unable to process search.');
-       }
+      }
     });
     } else {
-      console.log('work in progress');
       //TODO: implement corius search callback here...
     }
   }
@@ -96,7 +85,7 @@ class ContextSearch extends React.Component {
         <MenuItem
           key={src.id+index}
           value={src.id}
-          leftIcon={<FontIcon className="material-icons">{src.style.iconClassName}</FontIcon>}
+          leftIcon={<FontIcon className='material-icons'>{src.style.iconClassName}</FontIcon>}
           primaryText={src.name}
         />
       );
@@ -140,6 +129,8 @@ class ContextSearch extends React.Component {
       }
     };
 
+    const helpPageUrl = `${config.csxProxyEndpoint}//material/#/help/chimerasearch`;
+
     return(
       <div>
         <IconMenu
@@ -182,7 +173,8 @@ class ContextSearch extends React.Component {
           onEnterKeyDown={this._handleSearchEnter}
           ref='contextSearchField'
         />
-        <a href="/material/#/help/chimerasearch"  target="_blank">
+
+        <a href={helpPageUrl} target="_blank">
         <IconButton
           tooltip="Search Help"
           style={styles.icon}

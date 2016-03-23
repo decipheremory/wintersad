@@ -29,8 +29,7 @@ class Header extends React.Component {
   }
 
   render() {
-    //removed appId for now; current search defaults to 'all'
-    const { user, exports, profileUrl, searchDisabled, toolbarDisabled } = this.props;
+    const { user, exports, appId, profileUrl, searchDisabled, toolbarDisabled } = this.props;
     const styles = {
       header: {
         backgroundColor: '#444',
@@ -91,7 +90,7 @@ class Header extends React.Component {
       >
       {!searchDisabled &&
         <div style={styles.search}>
-          <ContextSearch defaultSource='all' />
+          <ContextSearch defaultSource={appId} />
         </div>
       }
       </AppBar>
@@ -107,7 +106,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   exports: React.PropTypes.array,
-  // appId: React.PropTypes.string,
+  appId: React.PropTypes.string,
   searchDisabled: React.PropTypes.bool,
   toolbarDisabled: React.PropTypes.bool,
   getUserDisplayName: React.PropTypes.func,
