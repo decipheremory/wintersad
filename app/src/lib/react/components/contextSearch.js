@@ -60,12 +60,12 @@ class ContextSearch extends React.Component {
     let selectedSrc = this.state.valueMultiple.toString();    
     let query = this.refs.contextSearchField.getValue();
     if (config.useLegacySearch) {
-      fetch( `${config.csxProxyEndpoint}/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`, {
+      fetch( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, {
         method: 'GET'
       }) 
     .then(function(response) {
       if ( response.status >= 200 && response.status < 300 || response.status === 304 ) {
-        window.open( `${config.csxProxyEndpoint}/material/#/chimera-search/search?query=${query}&index=${selectedSrc}`, '_blank');
+        window.open( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, '_blank');
       } else {
         alert('Unable to process search.');
       }
@@ -129,7 +129,7 @@ class ContextSearch extends React.Component {
       }
     };
 
-    const helpPageUrl = `${config.csxProxyEndpoint}//material/#/help/chimerasearch`;
+    const helpPageUrl = `${config.csxProxySearchHelpEndpoint}`;
 
     return(
       <div>
