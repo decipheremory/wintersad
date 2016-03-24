@@ -10,6 +10,8 @@ import Colors from 'material-ui/lib/styles/colors';
 import Divider from 'material-ui/lib/divider';
 import Dispatcher from '../api/dispatcher';
 import HeaderMgr from '../mgrs/headerMgr';
+import config from '../../headerConfig';
+
 
 class ContextSearch extends React.Component {
 
@@ -24,7 +26,6 @@ class ContextSearch extends React.Component {
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
     this._onSourcesUpdate = this._onSourcesUpdate.bind(this);
     Dispatcher.subscribe('searchSourcesUpdated', this._onSourcesUpdate.bind(this));
-
   }
 
   componentWillMount() {
@@ -32,20 +33,46 @@ class ContextSearch extends React.Component {
   }
 
   _onSourcesUpdate(eventObj) {
+    var tempSources = eventObj.data;
+    var sourceNameArr = [];
+    tempSources.map(function(src, index) {
+      sourceNameArr.push(src.id);
+    });
     this.setState({
-      sources: eventObj.data
+      sources: eventObj.data,
+      allSources: sourceNameArr
     });
   }
 
   _handleChangeMultiple(event, value) {
+    var selectedSources= this.state.valueMultiple;
+    if (value.indexOf('all') > -1) {
+      selectedSources = this.state.allSources;
+    } else {
+      selectedSources = value;
+    }
     this.setState({
-      valueMultiple: value
+      valueMultiple: selectedSources
     });
   }
 
   _handleSearchEnter() {
-    // console.log(this.refs.contextSearchField.getValue());
-    // TODO: implement callback here...
+    let selectedSrc = this.state.valueMultiple.toString();    
+    let query = this.refs.contextSearchField.getValue();
+    if (config.useLegacySearch) {
+      fetch( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, {
+        method: 'GET'
+      }) 
+    .then(function(response) {
+      if ( response.status >= 200 && response.status < 300 || response.status === 304 ) {
+        window.open( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, '_blank');
+      } else {
+        alert('Unable to process search.');
+      }
+    });
+    } else {
+      //TODO: implement corius search callback here...
+    }
   }
 
   _renderMenuItems(sources, internal) {
@@ -58,7 +85,7 @@ class ContextSearch extends React.Component {
         <MenuItem
           key={src.id+index}
           value={src.id}
-          leftIcon={<FontIcon className="material-icons">{src.style.iconClassName}</FontIcon>}
+          leftIcon={<FontIcon className='material-icons'>{src.style.iconClassName}</FontIcon>}
           primaryText={src.name}
         />
       );
@@ -100,8 +127,9 @@ class ContextSearch extends React.Component {
         fontSize: 'small',
         marginLeft: 10
       }
-
     };
+
+    const helpPageUrl = `${config.csxProxySearchHelpEndpoint}`;
 
     return(
       <div>
@@ -117,6 +145,7 @@ class ContextSearch extends React.Component {
           value={this.state.valueMultiple}
           onChange={this._handleChangeMultiple}
           multiple={true}
+          closeOnItemTouchTap={false} 
         >
           <MenuItem
             value="all"
@@ -132,8 +161,8 @@ class ContextSearch extends React.Component {
           <Divider />
           <div style={styles.sourceTypeLabel}>External Data</div>
           {this._renderMenuItems(this.state.sources, true)}
-
         </IconMenu>
+
         <TextField
           hintText="Enter Search Query"
           underlineStyle={styles.underline}
@@ -144,12 +173,15 @@ class ContextSearch extends React.Component {
           onEnterKeyDown={this._handleSearchEnter}
           ref='contextSearchField'
         />
+
+        <a href={helpPageUrl} target="_blank">
         <IconButton
-          tooltip="Search"
+          tooltip="Search Help"
           style={styles.icon}
         >
           <img src={'./lib/img/help.png'} />
         </IconButton>
+        </a>
       </div>
     );
   }
