@@ -31,7 +31,7 @@ Fastest way to install the module is to use jspm. From your [Corius](https://git
 
 `jspm install npm:chimera-header-web-ui`
 
-Chimera header module currently utilized a lot of the materialized icons. Thus please remember to reference the stylesheet within the index.html file. Corius based React/Material applciations should already have the lib installed. You'll just need to reference it.
+Chimera header module currently utilized a lot of the materialized icons. Thus please remember to reference the stylesheet within the index.html file. Corius based React/Material applciations should already have the lib installed. You'll just need to reference it. Current header relies on the fontAwesome lib to be installed to your app.
 
 ```html
 <link rel="stylesheet" href="icons/materialDesign/material-icons.css">
