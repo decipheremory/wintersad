@@ -25,6 +25,101 @@ If you want to take a look at what the header looks like from a standalone vanil
 `npm install`
 `gulp`
 
+## Integration/Installation to Corius Based Apps.
+
+Fastest way to install the module is to use jspm. From your [Corius](https://gitlab.363-283.io/cte/corius) generated app. Run
+
+`jspm install npm:chimera-header-web-ui`
+
+Chimera header module currently utilized a lot of the materialized icons. Thus please remember to reference the stylesheet within the index.html file. Corius based React/Material applciations should already have the lib installed. You'll just need to reference it. Current header relies on the fontAwesome lib to be installed to your app.
+
+```html
+<link rel="stylesheet" href="icons/materialDesign/material-icons.css">
+<link rel="stylesheet" href="icons/fontAwesome/css/font-awesome.min.css">
+```
+
+The following will need to be done within Corius application. Need to create a **images.js** under the **gulpTasks** directory.
+
+```js
+'use strict';
+
+var path = require('path');
+var gulp = require('gulp');
+var rename = require('gulp-rename');
+var replace = require('gulp-replace');
+
+gulp.task('copyImagesFromJspmModules', function(done) {
+  return gulp.src('src/jspm_packages/**/*.{png,jpeg}')
+    .pipe(rename({dirname: ''}))
+    .pipe(gulp.dest(path.join(global.paths.imgDist, 'jspm')));
+});
+```
+
+This task copies the necessary image assets to the **dist/img/jspm** directory where references to the source could be relative within the application.
+
+Add the task call to the **serve.js** file. Below is a snippet example of the integration/usage pattern.
+
+```js
+// Start local dev server.
+gulp.task('serve', function(done) {
+  var sequence = ['indexHtml', 'fonts', 'systemJsConfig', 'less', 'icons', 'templates', 'js', 'copyImagesFromJspmModules'];
+
+  runSeq('clean', sequence, 'watch', function() {
+    _browserSync = browserSync.create('Dev Server');
+
+    // set serverOptions here due to dependency on global.baseUrl which is
+    // set by the baseUrl task in the indexHtml task
+    var serverOptions = {
+      open: false,
+      ui: false,
+      notify: false,
+      ghostMode: false,
+      port: process.env.PORT || 9000,
+      server: {
+        baseDir: global.paths.dist,
+        routes: {
+          [global.baseUrl + 'system.config.js']: './src/system.config.js',
+          [global.baseUrl + 'jspm_packages']: './src/jspm_packages'
+        }
+      },
+      middleware: [
+        historyApiFallback({
+          historyApiFallback: true
+        })
+      ]
+    };
+
+    return _browserSync.init(serverOptions, done);
+  });
+});
+```
+
+Also add task call to the **build.js** file
+
+```js
+// One build task to rule them all.
+gulp.task('build', function(done) {
+  global.buildMode = true;
+
+  var preBuild = ['buildPrep'];
+  var build = ['buildImgs', 'indexHtml', 'buildJs', 'fonts', 'copyFontsFromJspmModules', 'copyImagesFromJspmModules'];
+  var postBuild = ['combineCss'];
+
+  build.push('icons');
+
+  runSeq('clean', preBuild, build, 'rewriteBundledCssUrlsForJspmFonts', postBuild, done);
+});
+```
+
+Add the following properties to your **appConfig.js** configuration file.
+
+```js
+export default {
+  userProfileEndpoint: 'https://chm.363-283.io/apps/userprofile/',
+  appId: 'standalone-header'
+};
+```
+
 ## Examples
 
 ### Integrating to React Based Applications
@@ -84,10 +179,10 @@ map: {
 }
 ```
 
-Create new HeaderController in `src/js/headerCtrl.js`. Below is bare vanilla snippet.
+Create new HeaderController in `src/js/headerCtrl.js`. Below is bare vanilla snippet example of the integration/usage pattern.
 
 ```js
-// navCtrl.js
+// headerCtrl.js
 
 import mainModule from '../mainModule';
 import appConfig from '../appConfig';
@@ -115,7 +210,27 @@ mainModule.controller('HeaderController', ['Authentication', '$scope', function(
 mainModule.value('Header', Header);
 ```
 
-Create new header view template in `src/js/templates/header.tpl.html`. Below is the snippet.
+Within `src/js/app.js`, import the HeaderCtrl. The ordering is important. Below is the snippet example of the integration/usage pattern.
+```js
+// app.js
+
+import 'es6-shim';
+
+/**
+  The order of modules is important.
+  Modules that are dependencies of others should be placed higher up.
+**/
+
+import './services/application';
+import './services/authentication';
+import './controllers/navCtrl';
+import './controllers/loginCtrl';
+import './controllers/mainCtrl';
+import './controllers/headerCtrl';
+import './mainModule';
+```
+
+Create new header view template in `src/js/templates/header.tpl.html`. Below is the snippet example of the integration/usage pattern.
 
 ```html
 <react-component name="Header" props="header" watch-depth="reference"/>
@@ -129,6 +244,8 @@ Within `src/js/mainModule.js` import the **ngreact** module and inject the react
 ```js
 import 'ngreact';
 
+import headerTpl from './templates/header.tpl.html!text';
+
 var mainModule = angular.module('Main', [
   'react',
 
@@ -140,7 +257,7 @@ var mainModule = angular.module('Main', [
 ]);
 ```
 
-Next, update the $stateProvider within `src/js/mainModule.js`. Below is the snippet.
+Next, update the $stateProvider within `src/js/mainModule.js`. Below is the snippet example of the integration/usage pattern.
 
 ```js
 $stateProvider
@@ -198,102 +315,6 @@ Next, add the following app container within `src/index.html`.
 
 ```html
 <div id="app"></div>
-```
-
-## Installation
-
-Fastest way to install the module is to use jspm. From your [Corius](https://gitlab.363-283.io/cte/corius) generated app. Run
-
-`jspm install npm:chimera-header-web-ui`
-
-Chimera header module currently utilized a lot of the materialized icons. Thus please remember to reference the stylesheet within the index.html file. Corius based React/Material applciations should already have the lib installed. You'll just need to reference it.
-
-```html
-<link rel="stylesheet" href="icons/materialDesign/material-icons.css">
-<link rel="stylesheet" href="icons/fontAwesome/css/font-awesome.min.css">
-```
-
-The following will need to be done within Corius application. Need to create a **images.js** under the **gulpTasks** directory.
-
-```js
-'use strict';
-
-var path = require('path');
-var gulp = require('gulp');
-var rename = require('gulp-rename');
-var replace = require('gulp-replace');
-
-gulp.task('copyImagesFromJspmModules', function(done) {
-  return gulp.src('src/jspm_packages/**/*.{png,jpeg}')
-    .pipe(rename({dirname: ''}))
-    .pipe(gulp.dest(path.join(global.paths.imgDist, 'jspm')));
-});
-```
-
-This task copies the necessary image assets to the **dist/img/jspm** directory where references to the source could be relative within the application.
-
-Add the task call to the **serve.js** file
-
-```js
-// Start local dev server.
-gulp.task('serve', function(done) {
-  global.buildMode = false;
-
-  var sequence = ['indexHtml', 'fonts', 'systemJsConfig', 'less', 'icons', 'js', 'copyImagesFromJspmModules'];
-  runSeq('clean', sequence, 'watch', function() {
-    _browserSync = browserSync.create('Dev Server');
-
-    // set serverOptions here due to dependency on global.baseUrl which is
-    // set by the baseUrl task in the indexHtml task
-    var serverOptions = {
-      open: false,
-      ui: false,
-      notify: false,
-      ghostMode: false,
-      port: process.env.PORT || 9000,
-      server: {
-        baseDir: global.paths.dist,
-        routes: {
-          [global.baseUrl + 'system.config.js']: './src/system.config.js',
-          [global.baseUrl + 'jspm_packages']: './src/jspm_packages'
-        }
-      },
-      middleware: [
-        historyApiFallback({
-          historyApiFallback: true
-        })
-      ]
-    };
-
-    return _browserSync.init(serverOptions, done);
-  });
-});
-```
-
-Also add task call to the **build.js** file
-
-```js
-// One build task to rule them all.
-gulp.task('build', function(done) {
-  global.buildMode = true;
-
-  var preBuild = ['buildPrep'];
-  var build = ['buildImgs', 'indexHtml', 'buildJs', 'fonts', 'copyFontsFromJspmModules', 'copyImagesFromJspmModules'];
-  var postBuild = ['combineCss'];
-
-  build.push('icons');
-
-  runSeq('clean', preBuild, build, 'rewriteBundledCssUrlsForJspmFonts', postBuild, done);
-});
-```
-
-Add the following properties to your **appConfig.js** configuration file.
-
-```js
-export default {
-  userProfileEndpoint: 'https://chm.363-283.io/apps/userprofile/',
-  appId: 'standalone-header'
-};
 ```
 
 ## Contribute
