@@ -1,9 +1,9 @@
-// appIcon.js
+// appIconPath.js
 
 import React from 'react';
 
 
-class AppIcon extends React.Component {
+class AppIconPath extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,6 +13,8 @@ class AppIcon extends React.Component {
     const styles = {
       label: {
         fontSize: 12,
+        fontStyle: 'normal',
+        textAlign: 'center',
         fontFamily: 'robotolight, Helvetica Neue, Helvetica, Arial, sans-serif'
       },
       li: {
@@ -23,21 +25,28 @@ class AppIcon extends React.Component {
         paddingBottom: 0,
         textAlign: 'center',
         color: '#444'
+      },
+      icon: {
+        height: 52,
+        weight: 52,
+        marginBottom: -5
       }
     };
     return(
       <li>
         <a href={appItem.url}>
-          <i style={styles.li} className={appItem.icon}>
-            <br /><label style={styles.label}>{appItem.title}</label></i>
+          <i style={styles.li}>
+            <img style={styles.icon} src={appItem.iconPath} />
+            <br /><label style={styles.label}>{appItem.title}</label>
+          </i>
         </a>
       </li>
     );
   }
 }
 
-AppIcon.propTypes = {
+AppIconPath.propTypes = {
   appItem: React.PropTypes.object.isRequired
 };
 
-export default AppIcon;
+export default AppIconPath;
