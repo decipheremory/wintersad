@@ -8,11 +8,11 @@ import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
 
-import AppTray from '../components/AppTray';
-import ContextSearch from '../components/ContextSearch';
-import UserExport from '../components/UserExport';
-import UserProfile from '../components/UserProfile';
-import UserNotification from '../components/UserNotification';
+import AppTray from '../components/appTray';
+import ContextSearch from '../components/contextSearch';
+import UserExport from '../components/userExport';
+import UserProfile from '../components/userProfile';
+import UserNotification from '../components/userNotification';
 import { HeaderWrapper } from '../components/headerWrapper';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
