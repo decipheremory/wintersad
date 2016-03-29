@@ -6,6 +6,7 @@ import IconButton from 'material-ui/lib/icon-button';
 import Popover from 'material-ui/lib/popover/popover';
 import PopoverAnimationFromTop from 'material-ui/lib/popover/popover-animation-from-top';
 import AppIcon from '../components/appIcon';
+import AppIconPath from '../components/appIconPath';
 import Dispatcher from '../api/dispatcher';
 import HeaderMgr from '../mgrs/headerMgr';
 
@@ -59,13 +60,24 @@ class AppTray extends React.Component {
   _renderApps(apps, appType) {
     return apps.map(function(app, index) {
       if(app.apptype === appType) {
-        return (
-          <AppIcon key={index} appItem={{
-            title: app.title,
-            url: app.url,
-            icon: app.icon
-          }} />
-        );
+        // if iconPath exists, load the iconPath component
+        if(app.iconPath.trim() !== '') {
+          return (
+            <AppIconPath key={index} appItem={{
+              title: app.title,
+              url: app.url,
+              iconPath: app.iconPath
+            }} />
+          );
+        } else {
+          return (
+            <AppIcon key={index} appItem={{
+              title: app.title,
+              url: app.url,
+              icon: app.icon
+            }} />
+          );
+        }
       }
       return null;
     });
