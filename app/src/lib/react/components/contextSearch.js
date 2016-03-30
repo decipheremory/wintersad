@@ -27,6 +27,8 @@ class ContextSearch extends React.Component {
 
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
     this._onSourcesUpdate = this._onSourcesUpdate.bind(this);
+    this._handleAllChecked = this._handleAllChecked.bind(this);
+    this._handleCheck = this._handleCheck.bind(this);
     Dispatcher.subscribe('searchSourcesUpdated', this._onSourcesUpdate.bind(this));
   }
 
@@ -43,23 +45,17 @@ class ContextSearch extends React.Component {
 
     this.setState({
       sources: eventObj.data,
-      allSources: sourceNameArr
+      allSources: sourceNameArr,
+      checkedArray: this.state.valueMultiple
     });
-  }
 
-  _handleChangeMultiple(event, value) {
-    var selectedSources= this.state.valueMultiple;
-
-    if (value.indexOf('all') > -1 ) {
-      selectedSources = this.state.allSources;
-    }  
-    else {
-      selectedSources = value;
+    //default to all sources for chimera search
+    if (this.state.valueMultiple.includes('search')) {
+      this.setState({
+        checkedArray: sourceNameArr,
+        allChecked: true
+      });
     }
-    this.setState({
-      valueMultiple: selectedSources,
-      checkedArray: selectedSources
-    });
   }
 
   _handleSearchEnter() {
@@ -77,23 +73,44 @@ class ContextSearch extends React.Component {
     }
 
     if (msg.length > 0) {
-      alert('Required field(s) missing: \n' + msg);
-      // return (
-      //     <div style={{color: 'red'}}>
-      //       {msg}
-      //       <IconButton iconClassName='material-icons' tooltip={msg} iconStyle={{color: 'red'}}>
-      //         error_outline
-      //       </IconButton>
-      //     </div>
-      //   );
-
+      return (
+          <div style={{color: 'red'}}>
+            {msg}
+            <IconButton iconClassName='material-icons' tooltip={msg} iconStyle={{color: 'red'}}>
+              error_outline
+            </IconButton>
+          </div>
+        );
     } else {
-
       if (config.useLegacySearch) {
         window.open( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, '_blank');
       } else {
         //TODO: implement corius search callback here...
       }
+    }
+  }
+
+  _handleAllChecked(e, checked) {
+    if (!checked ) {
+      var selectedSources = this.state.allSources.concat('search');
+      this.setState({
+        valueMultiple: selectedSources,
+        checkedArray: this.state.allSources, 
+        allChecked: true});
+    } else if (checked && this.state.allChecked ) {
+      this.setState({valueMultiple: [], allChecked: false, checkedArray: []});
+    }
+  }
+
+  _handleCheck(s, checked) { 
+    let selectedSources = this.state.checkedArray.concat(s.id);
+    this.setState({
+      valueMultiple: selectedSources
+    });
+    if (!checked) {
+      this.setState({checkedArray: selectedSources});
+    } else {
+      this.setState({checkedArray: selectedSources.filter((id) => id !== s.id)});
     }
   }
 
@@ -133,12 +150,13 @@ class ContextSearch extends React.Component {
         marginLeft: 10,
         color: Colors.grey700
       },
-      checkbox: {
-        marginBottom: 16
-      },
       selectedItems: {
         color: Colors.grey900
+      },
+      menuBorder: {
+        borderBottom: '1px solid #f5f5f5'
       }
+
     };
 
     const helpPageUrl = `${config.csxProxySearchHelpEndpoint}`;
@@ -164,8 +182,8 @@ class ContextSearch extends React.Component {
         >
 
             <MenuItem
-              key='all' 
-              value='all'
+              key='search' 
+              value='search'
               primaryText={
                 <div style={{paddingLeft: '20px'}}>
                   <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>all_out</FontIcon> Search All Chimera
@@ -174,30 +192,23 @@ class ContextSearch extends React.Component {
               leftCheckbox={
                 <Checkbox
                   style={{top: '5px'}}
-                  checked={this.state.checkedArray.length === this.state.allSources.length} 
-                  onCheck={(e, checked) => {
-                    
-                    if (!checked ) {
-                      var selectedSources = this.state.allSources.concat('all');
-                      this.setState({
-                        valueMultiple: selectedSources,
-                        checkedArray: this.state.allSources, 
-                        allChecked: true});
-                    } else if (checked && this.state.allChecked ) {
-                      this.setState({valueMultiple: [], allChecked: false, checkedArray: []});
-                    }
-                  } } /> 
+                  checked={this.state.checkedArray.length  === this.state.allSources.length} 
+                  onCheck={this._handleAllChecked} 
+                  iconStyle={{
+                    fill: '#333'
+                  }}/> 
               }/>
 
             <div style={styles.sourceTypeLabel}>Internal Data</div>
             {
               this.state.sources.filter((s) => s.internal).map((s) => {
+               
                 return (
   
                   <MenuItem
                     key={s.id}
                     value={s.id}
-                    style={{borderBottom: '1px solid #f5f5f5'}}
+                    className={styles.menuBorder}
                     primaryText={
                       <div style={{paddingLeft: '20px'}}>
                         <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>{s.style.iconClassName}</FontIcon> {s.name}
@@ -207,16 +218,9 @@ class ContextSearch extends React.Component {
                       <Checkbox
                         style={{top: '5px'}}
                         checked={this.state.checkedArray.includes(s.id)}
-                        onCheck={(e, checked) => {
-                          let selectedSources = this.state.checkedArray.concat(s.id);
-                          this.setState({
-                            valueMultiple: selectedSources
-                          });
-                          if (!checked) {
-                            this.setState({checkedArray: selectedSources});
-                          } else {
-                            this.setState({checkedArray: selectedSources.filter((id) => id !== s.id)});
-                          }
+                        onCheck={(e, checked) => this._handleCheck(s, checked)}
+                        iconStyle={{
+                          fill: '#333'
                         }}/>
                     }/>
                 );
@@ -230,7 +234,7 @@ class ContextSearch extends React.Component {
                   <MenuItem
                     key={s.id}
                     value={s.id}
-                    style={{borderBottom: '1px solid #f5f5f5'}}
+                    className={styles.menuBorder}
                     primaryText={
                       <div style={{paddingLeft: '20px'}}>
                         <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>{s.style.iconClassName}</FontIcon> {s.name}
@@ -240,16 +244,9 @@ class ContextSearch extends React.Component {
                       <Checkbox
                         style={{top: '5px'}}
                         checked={this.state.checkedArray.includes(s.id)}
-                        onCheck={(e, checked) => {
-                          let selectedSources = this.state.checkedArray.concat(s.id);
-                          this.setState({
-                            valueMultiple: selectedSources
-                          });
-                          if (!checked) {
-                            this.setState({checkedArray: selectedSources});
-                          } else {
-                            this.setState({checkedArray: selectedSources.filter((id) => id !== s.id)});
-                          }
+                        onCheck={(e, checked) => this._handleCheck(s, checked)}
+                        iconStyle={{
+                          fill: '#333'
                         }}/>
                  }/>
                 );
