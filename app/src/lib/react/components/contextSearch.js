@@ -6,8 +6,8 @@ import IconButton from 'material-ui/lib/icon-button';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import FontIcon from 'material-ui/lib/font-icon';
+import Checkbox from 'material-ui/lib/checkbox';
 import Colors from 'material-ui/lib/styles/colors';
-import Divider from 'material-ui/lib/divider';
 import Dispatcher from '../api/dispatcher';
 import HeaderMgr from '../mgrs/headerMgr';
 import config from '../../headerConfig';
@@ -19,12 +19,16 @@ class ContextSearch extends React.Component {
     super(props);
     this.state = {
       sources: [],
-      valueMultiple: [this.props.defaultSource]
+      valueMultiple: [this.props.defaultSource],
+      allSources: [] , 
+      checkedArray: [this.props.defaultSource],
+      allChecked: false
     };
-    this._handleChangeMultiple = this._handleChangeMultiple.bind(this);
-    this._renderMenuItems = this._renderMenuItems.bind(this);
+
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
     this._onSourcesUpdate = this._onSourcesUpdate.bind(this);
+    this._handleAllChecked = this._handleAllChecked.bind(this);
+    this._handleCheck = this._handleCheck.bind(this);
     Dispatcher.subscribe('searchSourcesUpdated', this._onSourcesUpdate.bind(this));
   }
 
@@ -38,58 +42,76 @@ class ContextSearch extends React.Component {
     tempSources.map(function(src, index) {
       sourceNameArr.push(src.id);
     });
+
     this.setState({
       sources: eventObj.data,
-      allSources: sourceNameArr
+      allSources: sourceNameArr,
+      checkedArray: this.state.valueMultiple
     });
-  }
 
-  _handleChangeMultiple(event, value) {
-    var selectedSources= this.state.valueMultiple;
-    if (value.indexOf('all') > -1) {
-      selectedSources = this.state.allSources;
-    } else {
-      selectedSources = value;
+    //default to all sources for chimera search
+    if (this.state.valueMultiple.includes('search')) {
+      this.setState({
+        checkedArray: sourceNameArr,
+        allChecked: true
+      });
     }
-    this.setState({
-      valueMultiple: selectedSources
-    });
   }
 
   _handleSearchEnter() {
-    let selectedSrc = this.state.valueMultiple.toString();    
+    let selectedSrc = this.state.checkedArray;
     let query = this.refs.contextSearchField.getValue();
-    if (config.useLegacySearch) {
-      fetch( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, {
-        method: 'GET'
-      }) 
-    .then(function(response) {
-      if ( response.status >= 200 && response.status < 300 || response.status === 304 ) {
+    let noSourceSelected = 'Please select at least one source.\n';
+    let noQuery = 'Please enter a search term.\n';
+    let msg = '';
+
+    if (this.state.valueMultiple.length === 0) {
+      msg += noSourceSelected;
+    }
+    if (query.length === 0) {
+      msg += noQuery;
+    }
+
+    if (msg.length > 0) {
+      return (
+          <div style={{color: 'red'}}>
+            {msg}
+            <IconButton iconClassName='material-icons' tooltip={msg} iconStyle={{color: 'red'}}>
+              error_outline
+            </IconButton>
+          </div>
+        );
+    } else {
+      if (config.useLegacySearch) {
         window.open( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, '_blank');
       } else {
-        alert('Unable to process search.');
+        //TODO: implement corius search callback here...
       }
-    });
-    } else {
-      //TODO: implement corius search callback here...
     }
   }
 
-  _renderMenuItems(sources, internal) {
-    let fSources = _.reject(sources, function(src){
-      return internal ? src.internal : !src.internal;
-    });
+  _handleAllChecked(e, checked) {
+    if (!checked ) {
+      var selectedSources = this.state.allSources.concat('search');
+      this.setState({
+        valueMultiple: selectedSources,
+        checkedArray: this.state.allSources, 
+        allChecked: true});
+    } else if (checked && this.state.allChecked ) {
+      this.setState({valueMultiple: [], allChecked: false, checkedArray: []});
+    }
+  }
 
-    return fSources.map(function(src, index) {
-      return (
-        <MenuItem
-          key={src.id+index}
-          value={src.id}
-          leftIcon={<FontIcon className='material-icons'>{src.style.iconClassName}</FontIcon>}
-          primaryText={src.name}
-        />
-      );
+  _handleCheck(s, checked) { 
+    let selectedSources = this.state.checkedArray.concat(s.id);
+    this.setState({
+      valueMultiple: selectedSources
     });
+    if (!checked) {
+      this.setState({checkedArray: selectedSources});
+    } else {
+      this.setState({checkedArray: selectedSources.filter((id) => id !== s.id)});
+    }
   }
 
   render() {
@@ -125,8 +147,16 @@ class ContextSearch extends React.Component {
       },
       sourceTypeLabel: {
         fontSize: 'small',
-        marginLeft: 10
+        marginLeft: 10,
+        color: Colors.grey700
+      },
+      selectedItems: {
+        color: Colors.grey900
+      },
+      menuBorder: {
+        borderBottom: '1px solid #f5f5f5'
       }
+
     };
 
     const helpPageUrl = `${config.csxProxySearchHelpEndpoint}`;
@@ -143,25 +173,87 @@ class ContextSearch extends React.Component {
           anchorOrigin={styles.anchorOrigin}
           targetOrigin={styles.targetOrigin}
           value={this.state.valueMultiple}
-          onChange={this._handleChangeMultiple}
+          onChange={(event, index, value) => {
+            this.setState({valueMultiple: value});
+          }}
           multiple={true}
           closeOnItemTouchTap={false} 
+          selectedMenuItemStyle={styles.selectedItems}
         >
-          <MenuItem
-            value="all"
-            leftIcon={
-              <FontIcon>
-                <img style={styles.icon} src={'./lib/img/ChimeraLogo_v3_blk_256x256.png'} />
-              </FontIcon>
+
+            <MenuItem
+              key='search' 
+              value='search'
+              primaryText={
+                <div style={{paddingLeft: '20px'}}>
+                  <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>all_out</FontIcon> Search All Chimera
+                </div>
+              }
+              leftCheckbox={
+                <Checkbox
+                  style={{top: '5px'}}
+                  checked={this.state.checkedArray.length  === this.state.allSources.length} 
+                  onCheck={this._handleAllChecked} 
+                  iconStyle={{
+                    fill: '#333'
+                  }}/> 
+              }/>
+
+            <div style={styles.sourceTypeLabel}>Internal Data</div>
+            {
+              this.state.sources.filter((s) => s.internal).map((s) => {
+               
+                return (
+  
+                  <MenuItem
+                    key={s.id}
+                    value={s.id}
+                    className={styles.menuBorder}
+                    primaryText={
+                      <div style={{paddingLeft: '20px'}}>
+                        <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>{s.style.iconClassName}</FontIcon> {s.name}
+                      </div>
+                    }
+                    leftCheckbox={
+                      <Checkbox
+                        style={{top: '5px'}}
+                        checked={this.state.checkedArray.includes(s.id)}
+                        onCheck={(e, checked) => this._handleCheck(s, checked)}
+                        iconStyle={{
+                          fill: '#333'
+                        }}/>
+                    }/>
+                );
+              })
             }
-            primaryText="Search All Chimera"
-          />
-          <div style={styles.sourceTypeLabel}>Internal Data</div>
-          {this._renderMenuItems(this.state.sources, false)}
-          <Divider />
-          <div style={styles.sourceTypeLabel}>External Data</div>
-          {this._renderMenuItems(this.state.sources, true)}
-        </IconMenu>
+
+            <div style={styles.sourceTypeLabel}>External Data</div>
+            {
+              this.state.sources.filter((s) => !s.internal).map((s) => {
+                return (
+                  <MenuItem
+                    key={s.id}
+                    value={s.id}
+                    className={styles.menuBorder}
+                    primaryText={
+                      <div style={{paddingLeft: '20px'}}>
+                        <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>{s.style.iconClassName}</FontIcon> {s.name}
+                      </div>
+                    }
+                    leftCheckbox={
+                      <Checkbox
+                        style={{top: '5px'}}
+                        checked={this.state.checkedArray.includes(s.id)}
+                        onCheck={(e, checked) => this._handleCheck(s, checked)}
+                        iconStyle={{
+                          fill: '#333'
+                        }}/>
+                 }/>
+                );
+              })
+            }
+          </IconMenu>
+
 
         <TextField
           hintText="Enter Search Query"
@@ -182,10 +274,12 @@ class ContextSearch extends React.Component {
           <img src={'./lib/img/help.png'} />
         </IconButton>
         </a>
+
       </div>
     );
   }
 }
+
 
 ContextSearch.propTypes = {
   defaultSource: React.PropTypes.string
