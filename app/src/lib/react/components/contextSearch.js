@@ -61,43 +61,22 @@ class ContextSearch extends React.Component {
   _handleSearchEnter() {
     let selectedSrc = this.state.checkedArray;
     let query = this.refs.contextSearchField.getValue();
-    let noSourceSelected = 'Please select at least one source.\n';
-    let noQuery = 'Please enter a search term.\n';
-    let msg = '';
 
-    if (this.state.valueMultiple.length === 0) {
-      msg += noSourceSelected;
-    }
-    if (query.length === 0) {
-      msg += noQuery;
-    }
-
-    if (msg.length > 0) {
-      return (
-          <div style={{color: 'red'}}>
-            {msg}
-            <IconButton iconClassName='material-icons' tooltip={msg} iconStyle={{color: 'red'}}>
-              error_outline
-            </IconButton>
-          </div>
-        );
-    } else {
       if (config.useLegacySearch) {
         window.open( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, '_blank');
       } else {
         //TODO: implement corius search callback here...
       }
-    }
   }
 
   _handleAllChecked(e, checked) {
-    if (!checked ) {
+    if (checked ) {
       var selectedSources = this.state.allSources.concat('search');
       this.setState({
         valueMultiple: selectedSources,
         checkedArray: this.state.allSources, 
         allChecked: true});
-    } else if (checked && this.state.allChecked ) {
+    } else if (!checked && this.state.allChecked ) {
       this.setState({valueMultiple: [], allChecked: false, checkedArray: []});
     }
   }
@@ -107,7 +86,7 @@ class ContextSearch extends React.Component {
     this.setState({
       valueMultiple: selectedSources
     });
-    if (!checked) {
+    if (checked) {
       this.setState({checkedArray: selectedSources});
     } else {
       this.setState({checkedArray: selectedSources.filter((id) => id !== s.id)});
