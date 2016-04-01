@@ -50,7 +50,7 @@ class ContextSearch extends React.Component {
     });
 
     //default to all sources for chimera search
-    if (this.state.valueMultiple.includes('search')) {
+    if (this.state.valueMultiple.indexOf('search') !== -1) {
       this.setState({
         checkedArray: sourceNameArr,
         allChecked: true
@@ -196,7 +196,7 @@ class ContextSearch extends React.Component {
                     leftCheckbox={
                       <Checkbox
                         style={{top: '5px'}}
-                        checked={this.state.checkedArray.includes(s.id)}
+                        checked={this.state.checkedArray.indexOf(s.id) !== -1}
                         onCheck={(e, checked) => this._handleCheck(s, checked)}
                         iconStyle={{
                           fill: '#333'
@@ -222,7 +222,7 @@ class ContextSearch extends React.Component {
                     leftCheckbox={
                       <Checkbox
                         style={{top: '5px'}}
-                        checked={this.state.checkedArray.includes(s.id)}
+                        checked={this.state.checkedArray.indexOf(s.id) !== -1}
                         onCheck={(e, checked) => this._handleCheck(s, checked)}
                         iconStyle={{
                           fill: '#333'
