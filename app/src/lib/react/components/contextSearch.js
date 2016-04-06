@@ -61,7 +61,7 @@ class ContextSearch extends React.Component {
     let query = this.refs.contextSearchField.getValue();
 
     if (config.useLegacySearch) {
-      window.open( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, '_blank');
+      window.location.href = `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`;
     } else {
       const data = {
         searchTerm: query,
