@@ -106,7 +106,7 @@ class AppTray extends React.Component {
         background: '#fff',
         margin: 0,
         padding: 18,
-        width: 510,
+        width: 520,
         overflow: 'hidden',
         listStyle: 'none'
       },
