@@ -100,13 +100,13 @@ class AppTray extends React.Component {
         minHeight: 40,
         overflowY: 'auto',
         overflowX: 'hidden',
-        width: 300
+        width: 520
       },
       ul: {
         background: '#fff',
         margin: 0,
         padding: 18,
-        width: 300,
+        width: 510,
         overflow: 'hidden',
         listStyle: 'none'
       },
