@@ -21,8 +21,7 @@ class ContextSearch extends React.Component {
       sources: [],
       valueMultiple: [this.props.defaultSource],
       allSources: [] , 
-      checkedArray: [this.props.defaultSource],
-      allChecked: false
+      checkedArray: [] 
     };
 
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
@@ -52,8 +51,7 @@ class ContextSearch extends React.Component {
     //default to all sources for chimera search
     if (this.state.valueMultiple.indexOf('search') !== -1) {
       this.setState({
-        checkedArray: sourceNameArr,
-        allChecked: true
+        checkedArray: sourceNameArr 
       });
     }
   }
@@ -62,34 +60,34 @@ class ContextSearch extends React.Component {
     let selectedSrc = this.state.checkedArray;
     let query = this.refs.contextSearchField.getValue();
 
-      if (config.useLegacySearch) {
-        window.open( `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`, '_blank');
-      } else {
-        //TODO: implement corius search callback here...
-      }
-  }
-
-  _handleAllChecked(e, checked) {
-    if (checked ) {
-      var selectedSources = this.state.allSources.concat('search');
-      this.setState({
-        valueMultiple: selectedSources,
-        checkedArray: this.state.allSources, 
-        allChecked: true});
-    } else if (!checked && this.state.allChecked ) {
-      this.setState({valueMultiple: [], allChecked: false, checkedArray: []});
+    if (config.useLegacySearch) {
+      window.location.href = `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`;
+    } else {
+      const data = {
+        searchTerm: query,
+        sources: selectedSrc
+      };
+      Dispatcher.publish('performHeaderSearch', data);
     }
   }
 
-  _handleCheck(s, checked) { 
-    let selectedSources = this.state.checkedArray.concat(s.id);
-    this.setState({
-      valueMultiple: selectedSources
-    });
+  _handleAllChecked(e, checked) {  
     if (checked) {
-      this.setState({checkedArray: selectedSources});
+      var selectedSources = this.state.allSources;
+      this.setState({
+        valueMultiple: selectedSources,
+        checkedArray: this.state.allSources 
+      });
+    } else  {
+      this.setState({valueMultiple: [], checkedArray: []});
+    }
+  }
+
+  _handleCheck(s, checked) {
+    if (checked) {
+      this.setState({checkedArray: this.state.checkedArray.concat(s.id)});
     } else {
-      this.setState({checkedArray: selectedSources.filter((id) => id !== s.id)});
+      this.setState({checkedArray: this.state.checkedArray.filter((id) => id !== s.id)});
     }
   }
 
@@ -151,11 +149,6 @@ class ContextSearch extends React.Component {
           }
           anchorOrigin={styles.anchorOrigin}
           targetOrigin={styles.targetOrigin}
-          value={this.state.valueMultiple}
-          onChange={(event, index, value) => {
-            this.setState({valueMultiple: value});
-          }}
-          multiple={true}
           closeOnItemTouchTap={false} 
           selectedMenuItemStyle={styles.selectedItems}
         >
