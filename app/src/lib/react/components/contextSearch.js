@@ -59,15 +59,20 @@ class ContextSearch extends React.Component {
   _handleSearchEnter() {
     let selectedSrc = this.state.checkedArray;
     let query = this.refs.contextSearchField.getValue();
+    const data = {
+      searchTerm: query,
+      sources: selectedSrc
+    };
 
-    if (config.useLegacySearch) {
-      window.location.href = `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`;
+   if (config.useLegacySearch) {
+      //if not chimera search, redirect to legacy
+      if (this.props.defaultSource !== 'search') {
+        window.location.href = `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`;
+      } else {
+        Dispatcher.publish('performHeaderSearch', data);
+      }
     } else {
-      const data = {
-        searchTerm: query,
-        sources: selectedSrc
-      };
-      Dispatcher.publish('performHeaderSearch', data);
+        Dispatcher.publish('performHeaderSearch', data);
     }
   }
 
@@ -109,7 +114,9 @@ class ContextSearch extends React.Component {
       },
       input: {
         width: 500,
-        color: Colors.grey100
+        color: Colors.grey100,
+        boxShadow: 'none',
+        borderBottom: 'none'
       },
       hint: {
         color: Colors.grey400
@@ -149,7 +156,7 @@ class ContextSearch extends React.Component {
           }
           anchorOrigin={styles.anchorOrigin}
           targetOrigin={styles.targetOrigin}
-          closeOnItemTouchTap={false} 
+          closeOnItemTouchTap={false}  
           selectedMenuItemStyle={styles.selectedItems}
         >
 
@@ -180,7 +187,7 @@ class ContextSearch extends React.Component {
                   <MenuItem
                     key={s.id}
                     value={s.id}
-                    className={styles.menuBorder}
+                    style={styles.menuBorder}
                     primaryText={
                       <div style={{paddingLeft: '20px'}}>
                         <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>{s.style.iconClassName}</FontIcon> {s.name}
@@ -206,7 +213,7 @@ class ContextSearch extends React.Component {
                   <MenuItem
                     key={s.id}
                     value={s.id}
-                    className={styles.menuBorder}
+                    style={styles.menuBorder}
                     primaryText={
                       <div style={{paddingLeft: '20px'}}>
                         <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>{s.style.iconClassName}</FontIcon> {s.name}

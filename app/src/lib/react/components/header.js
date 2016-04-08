@@ -78,13 +78,14 @@ class Header extends React.Component {
             {this.props.hasUserData() &&
               <label style={styles.userDisplay}>{this.props.getUserDisplayName()}</label>
             }
+             <UserProfile profileUrl={profileUrl} />
+
             {this.props.hasExports() &&
               <UserExport exports={exports} />
             }
             {this.props.hasMessages() &&
               <UserNotification user={user} />
             }
-            <UserProfile profileUrl={profileUrl} />
           </span>
         }
       >
