@@ -60,13 +60,13 @@ class AppTray extends React.Component {
   _renderApps(apps, appType) {
     return apps.map(function(app, index) {
       if(app.apptype === appType) {
-        // if iconPath exists, load the iconPath component
-        if(app.iconPath.trim() !== '') {
+        // if appTrayIconPath exists, load the iconPath component
+        if(app.appTrayIconPath.trim() !== '') {
           return (
             <AppIconPath key={index} appItem={{
               title: app.title,
               url: app.url,
-              iconPath: app.iconPath
+              iconPath: app.appTrayIconPath
             }} />
           );
         } else {
