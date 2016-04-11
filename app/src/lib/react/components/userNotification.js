@@ -16,13 +16,13 @@ class UserNotification extends React.Component {
   }
 
   _renderMessages() {
-    if(this.props.messages.size > 0) {
-      return (this.props.messages).map(function(message, index) {
-        let iconType = message.get('type') === 'warning' ? 'warning' : 'error';
+    if(this.props.messages.length > 0) {
+      return (this.props.messages).map(function(msgObj, index) {
+        let iconType = msgObj.type === 'warning' ? 'warning' : 'error';
         return (
           <MenuItem
             key={index}
-            primaryText={message.get('message')}
+            primaryText={msgObj.message}
             leftIcon={<FontIcon className="material-icons">{iconType}</FontIcon>}
           />
         );
@@ -38,10 +38,10 @@ class UserNotification extends React.Component {
   }
 
   _renderNotificationIcon(styles) {
-    if(this.props.messages.size > 0) {
+    if(this.props.messages.length > 0) {
       return (
         <Badge
-          badgeContent={this.props.messages.size}
+          badgeContent={this.props.messages.length}
           primary={true}
           badgeStyle={styles.badgeStyle}
           style={styles.badgeStyle.icon}
