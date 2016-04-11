@@ -2,20 +2,18 @@
 
 import React from 'react';
 
-// import RollupBanner from 'capco-ui/lib/react/rollupBanner';
-
-import { AppBar } from 'material-ui';
-
-import Toolbar from 'material-ui/lib/toolbar/toolbar';
-import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
+import {
+  AppBar,
+  Toolbar,
+  ToolbarTitle
+ } from 'material-ui';
 
 import AppTray from '../components/appTray';
 import ContextSearch from '../components/contextSearch';
 import UserExport from '../components/userExport';
 import UserProfile from '../components/userProfile';
 import UserNotification from '../components/userNotification';
-// import { HeaderWrapper } from '../components/headerWrapper';
-// import styles from '../../styles';
+import RollupBanner from '../components/rollupBanner';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -73,13 +71,11 @@ class Header extends React.Component {
       }
     };
 
-    // <div>
-    //   <RollupBanner acm={rollupAcm} />
-    // </div>
-
     return (
       <div>
-
+        <div>
+          <RollupBanner acm={rollupAcm} />
+        </div>
         <AppBar
           style={styles.header}
           title="Chimera"
@@ -129,7 +125,7 @@ Header.propTypes = {
   user: React.PropTypes.object,
   messages: React.PropTypes.array,
   profileUrl: React.PropTypes.string,
-  // rollupAcm: React.PropTypes.object
+  rollupAcm: React.PropTypes.object
 };
 
 Header.defaultProps = {
@@ -139,7 +135,7 @@ Header.defaultProps = {
   profileUrl: '',
   searchDisabled: false,
   toolbarDisabled: false,
-  // rollupAcm: {}
+  rollupAcm: {}
 };
 
 export default Header;
