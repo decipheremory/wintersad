@@ -15,6 +15,7 @@ System.config({
   map: {
     "babel": "npm:babel-core@5.8.24",
     "babel-runtime": "npm:babel-runtime@5.8.24",
+    "capco-ui": "npm:capco-ui@1.0.61",
     "clean-css": "npm:clean-css@3.4.5",
     "core-js": "npm:core-js@1.1.4",
     "css": "github:systemjs/plugin-css@0.1.20",
@@ -39,6 +40,10 @@ System.config({
     "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
     "react-timeago": "npm:react-timeago@2.2.1",
     "whatwg-fetch": "npm:whatwg-fetch@0.9.0",
+    "github:angular-ui/ui-select2@0.0.5": {
+      "angular": "github:angular/bower-angular@1.2.29",
+      "select2": "github:select2/select2@3.5.4"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -83,6 +88,13 @@ System.config({
     "github:necolas/normalize.css@3.0.3": {
       "css": "github:systemjs/plugin-css@0.1.20"
     },
+    "github:select2/select2@3.5.4": {
+      "css": "github:systemjs/plugin-css@0.1.20",
+      "jquery": "npm:jquery@2.2.0"
+    },
+    "github:twbs/bootstrap@3.3.6": {
+      "jquery": "github:components/jquery@2.1.4"
+    },
     "npm:amdefine@1.0.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "module": "github:jspm/nodelibs-module@0.1.0",
@@ -106,6 +118,30 @@ System.config({
       "ieee754": "npm:ieee754@1.1.6",
       "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:capco-ui-angular@1.9.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:capco-ui@1.0.61": {
+      "angular": "github:angular/bower-angular@1.2.29",
+      "angular-bootstrap": "github:angular-ui/bootstrap-bower@0.14.3",
+      "angular-resource": "npm:angular-resource@1.2.28",
+      "angular-route": "npm:angular-route@1.2.28",
+      "angular-ui-select2": "github:angular-ui/ui-select2@0.0.5",
+      "bindonce": "github:Pasvaz/bindonce@0.3.3",
+      "bootstrap": "github:twbs/bootstrap@3.3.6",
+      "capco-ui-angular": "npm:capco-ui-angular@1.9.0",
+      "clean-css": "npm:clean-css@3.4.5",
+      "css": "github:systemjs/plugin-css@0.1.13",
+      "font-awesome": "npm:font-awesome@4.5.0",
+      "jquery": "npm:jquery@2.2.0",
+      "lodash": "github:lodash/lodash@3.10.1",
+      "object-assign": "npm:object-assign@4.0.1",
+      "react": "npm:react@0.14.5",
+      "react-dom": "npm:react-dom@0.14.1",
+      "select2": "github:select2/select2@3.5.4",
+      "systemjs/plugin-css": "github:systemjs/plugin-css@0.1.13"
     },
     "npm:clean-css@3.4.5": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -139,6 +175,15 @@ System.config({
     "npm:domain-browser@1.1.7": {
       "events": "github:jspm/nodelibs-events@0.1.1"
     },
+    "npm:envify@3.4.0": {
+      "jstransform": "npm:jstransform@10.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "through": "npm:through@2.3.8"
+    },
+    "npm:esprima-fb@13001.1001.0-dev-harmony-fb": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:fbjs@0.2.1": {
       "core-js": "npm:core-js@1.1.4",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -147,6 +192,9 @@ System.config({
     },
     "npm:fbjs@0.6.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:font-awesome@4.5.0": {
+      "css": "github:systemjs/plugin-css@0.1.20"
     },
     "npm:graceful-readlink@1.0.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2"
@@ -179,6 +227,14 @@ System.config({
     "npm:invariant@2.2.0": {
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:jstransform@10.1.0": {
+      "base62": "npm:base62@0.1.1",
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "esprima-fb": "npm:esprima-fb@13001.1001.0-dev-harmony-fb",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "source-map": "npm:source-map@0.1.31"
     },
     "npm:lodash._createassigner@3.1.1": {
       "lodash._bindcallback": "npm:lodash._bindcallback@3.0.1",
@@ -316,6 +372,11 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "react": "npm:react@0.14.7"
     },
+    "npm:react@0.14.5": {
+      "envify": "npm:envify@3.4.0",
+      "fbjs": "npm:fbjs@0.6.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:react@0.14.7": {
       "fbjs": "npm:fbjs@0.6.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -336,6 +397,12 @@ System.config({
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:source-map@0.1.31": {
+      "amdefine": "npm:amdefine@1.0.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:source-map@0.4.4": {
       "amdefine": "npm:amdefine@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -347,6 +414,10 @@ System.config({
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
+    },
+    "npm:through@2.3.8": {
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
     "npm:url@0.10.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

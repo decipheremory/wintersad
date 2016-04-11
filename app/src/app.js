@@ -16,11 +16,11 @@ const App = React.createClass({
           messages={userMock.messages}
           profileUrl={appConfig.userProfileEndpoint}
           appId={appConfig.appId}
+          rollupAcm={acmMocks.unclassified}
         />
       </div>
     );
   }
 });
-
 
 ReactDOM.render(<App />, document.getElementById('app'));
