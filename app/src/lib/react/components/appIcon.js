@@ -19,7 +19,7 @@ class AppIcon extends React.Component {
         float: 'left',
         height: 80,
         width: 120,
-        paddingTop: 0,
+        paddingTop: 10,
         paddingBottom: 0,
         textAlign: 'center',
         color: '#444'

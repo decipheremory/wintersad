@@ -57,9 +57,9 @@ class AppTray extends React.Component {
     });
   }
 
-  _renderApps(apps, appType) {
+  _renderApps(appId, apps, appType) {
     return apps.map(function(app, index) {
-      if(app.apptype === appType) {
+      if((app.apptype === appType) && (app.id !== appId)) {
         // if appTrayIconPath exists, load the iconPath component
         if(app.appTrayIconPath.trim() !== '') {
           return (
@@ -84,7 +84,7 @@ class AppTray extends React.Component {
   }
 
   render() {
-
+    const { appId } = this.props;
     const styles = {
       logo: {
         marginTop: -5,
@@ -141,11 +141,11 @@ class AppTray extends React.Component {
               <i style={styles.label} className="fa fa-info-circle fa-1x">You currently do not have access to any apps.</i>
             }
             <ul style={styles.ul}>
-              {this._renderApps(this.state.apps, 'internal')}
+              {this._renderApps(appId, this.state.apps, 'internal')}
             </ul>
             {this.state.apps.length > 0 && <hr style={styles.hr} />}
             <ul style={styles.ul}>
-              {this._renderApps(this.state.apps, 'external')}
+              {this._renderApps(appId, this.state.apps, 'external')}
             </ul>
           </div>
         </Popover>
@@ -155,7 +155,7 @@ class AppTray extends React.Component {
 }
 
 AppTray.propTypes = {
-
+  appId: React.PropTypes.string
 };
 
 AppTray.defaultProps = {
