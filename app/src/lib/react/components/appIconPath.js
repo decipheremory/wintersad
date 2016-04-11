@@ -19,19 +19,17 @@ class AppIconPath extends React.Component {
       },
       li: {
         float: 'left',
-        // height: 64,
-        // width: 80,
         height: 80,
         width: 120,
-        paddingTop: 0,
+        paddingTop: 10,
         paddingBottom: 0,
         textAlign: 'center',
         color: '#444'
       },
       icon: {
-        height: 52,
-        weight: 52,
-        marginBottom: -5
+        height: 42,
+        weight: 42,
+        marginBottom: 5
       }
     };
     return(

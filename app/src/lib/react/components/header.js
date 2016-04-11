@@ -67,7 +67,7 @@ class Header extends React.Component {
         titleStyle={styles.title}
         iconElementLeft={
           <span id='header-app-tray'>
-            <AppTray />
+            <AppTray appId={appId} />
           </span>
         }
         iconStyleRight={{

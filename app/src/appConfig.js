@@ -13,7 +13,7 @@ import 'normalize.css';
 export default {
   userServiceEndpoint: 'https://chm.363-283.io/service/userservice/1.0',
   userProfileEndpoint: 'https://chm.363-283.io/apps/userprofile/',
-  appId: 'standalone-header',
+  appId: 'chm_appname', // naming convention should be [org]_[appname]
   requestTimeout: 15000
 };
 
