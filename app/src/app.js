@@ -4,19 +4,16 @@ import ReactDOM from 'react-dom';
 import Header from 'lib/react/components/header';
 import appConfig from 'appConfig';
 
+import acmMocks from './lib/mocks/acmMocks';
+import userMock from './lib/mocks/userMock';
+
 const App = React.createClass({
   render() {
-    const mockUser = {
-      messages: [],
-      user: {
-        displayName: 'Testorius Ten'
-      }
-    };
-
     return (
       <div>
         <Header
-          user={mockUser.user}
+          user={userMock.user}
+          messages={userMock.messages}
           profileUrl={appConfig.userProfileEndpoint}
           appId={appConfig.appId}
         />

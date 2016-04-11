@@ -1,7 +1,7 @@
 /* eslint-disable indent, quotes */
 
 export default {
-    "messages": {foo: "bar"},
+    "messages": [{"foo": "bar"}],
     "user": {
         "firstName": "tester10",
         "middleInitial": null,
