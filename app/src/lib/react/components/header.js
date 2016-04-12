@@ -100,8 +100,8 @@ class Header extends React.Component {
               {user.exports &&
                 <UserExport exports={exports} />
               }
+              <UserProfile profileUrl={profileUrl} />
               <UserNotification user={user} messages={messages}/>
-              <UserProfile profileUrl={profileUrl} />       
             </span>
           }
         >

@@ -24,13 +24,20 @@ class UserProfile extends React.Component {
       targetOrigin: {
         horizontal: 'left',
         vertical: 'top'
-      }
+      },
+      icon: {
+        paddingTop: 8,
+        paddingRight: 0,
+        paddingBottom: 10,
+        paddingLeft: 0,
+        display: 'block'
+      },
     };
 
     return(
       <IconMenu
         iconButtonElement={
-          <IconButton>
+          <IconButton style={styles.icon}>
             <FontIcon className="material-icons" color={Colors.white}>person</FontIcon>
           </IconButton>
         }
