@@ -103,7 +103,7 @@ class UserNotification extends React.Component {
           paddingLeft: 0,
           marginRight: 7,
           display: 'block',
-          float: 'right'
+          float: 'left'
         }
       }
     };
