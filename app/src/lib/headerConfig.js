@@ -4,6 +4,6 @@ export default {
   searchEndpoint: '/apps/search/',
   csxProxyEndpoint: 'https://chm.363-283.io/material/#/chimera-search/search',
   csxProxySearchHelpEndpoint: 'https://chm.363-283.io/material/#/help/chimerasearch',
-  useLegacySearch: true,
+  useLegacySearch: false,
   requestTimeout: 15000
 };
