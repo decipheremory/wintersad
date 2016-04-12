@@ -1,7 +1,14 @@
 /* eslint-disable indent, quotes */
 
 export default {
-    "messages": [{"foo": "bar"}],
+    "messages": {
+      "user.profile.verify.needed": {
+          "type": "warning",
+          "key": "user.profile.verify.needed",
+          "message": "(U) Please review user profile and update if necessary.",
+          "code": null
+      }
+    },
     "user": {
         "firstName": "tester10",
         "middleInitial": null,

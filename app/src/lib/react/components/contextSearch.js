@@ -20,8 +20,8 @@ class ContextSearch extends React.Component {
     this.state = {
       sources: [],
       valueMultiple: [this.props.defaultSource],
-      allSources: [] , 
-      checkedArray: [] 
+      allSources: [] ,
+      checkedArray: []
     };
 
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
@@ -51,7 +51,7 @@ class ContextSearch extends React.Component {
     //default to all sources for chimera search
     if (this.state.valueMultiple.indexOf('search') !== -1) {
       this.setState({
-        checkedArray: sourceNameArr 
+        checkedArray: sourceNameArr
       });
     }
   }
@@ -77,12 +77,12 @@ class ContextSearch extends React.Component {
   }
 
 
-  _handleAllChecked(e, checked) {  
+  _handleAllChecked(e, checked) {
     if (checked) {
       var selectedSources = this.state.allSources;
       this.setState({
         valueMultiple: selectedSources,
-        checkedArray: this.state.allSources 
+        checkedArray: this.state.allSources
       });
     } else  {
       this.setState({valueMultiple: [], checkedArray: []});
@@ -98,7 +98,9 @@ class ContextSearch extends React.Component {
   }
 
   render() {
-    const styles = {
+    const { customStyles } = this.props;
+
+    const defaultStyles = {
       icon: {
         paddingTop: 0,
         paddingRight: 0,
@@ -114,6 +116,12 @@ class ContextSearch extends React.Component {
         borderColor: Colors.grey100
       },
       input: {
+        width: 500,
+        color: Colors.grey100,
+        boxShadow: 'none',
+        borderBottom: 'none'
+      },
+      overall: {
         width: 500,
         color: Colors.grey100,
         boxShadow: 'none',
@@ -141,8 +149,11 @@ class ContextSearch extends React.Component {
       menuBorder: {
         borderBottom: '1px solid #f5f5f5'
       }
-
     };
+
+    const styles = _.assign({}, defaultStyles, customStyles);
+
+
 
     const helpPageUrl = `${config.csxProxySearchHelpEndpoint}`;
 
@@ -157,12 +168,12 @@ class ContextSearch extends React.Component {
           }
           anchorOrigin={styles.anchorOrigin}
           targetOrigin={styles.targetOrigin}
-          closeOnItemTouchTap={false}  
+          closeOnItemTouchTap={false}
           selectedMenuItemStyle={styles.selectedItems}
         >
 
             <MenuItem
-              key='search' 
+              key='search'
               value='search'
               primaryText={
                 <div style={{paddingLeft: '20px'}}>
@@ -172,19 +183,19 @@ class ContextSearch extends React.Component {
               leftCheckbox={
                 <Checkbox
                   style={{top: '5px'}}
-                  checked={this.state.checkedArray.length  === this.state.allSources.length} 
-                  onCheck={this._handleAllChecked} 
+                  checked={this.state.checkedArray.length  === this.state.allSources.length}
+                  onCheck={this._handleAllChecked}
                   iconStyle={{
                     fill: '#333'
-                  }}/> 
+                  }}/>
               }/>
 
             <div style={styles.sourceTypeLabel}>Internal Data</div>
             {
               this.state.sources.filter((s) => s.internal).map((s) => {
-               
+
                 return (
-  
+
                   <MenuItem
                     key={s.id}
                     value={s.id}
@@ -239,7 +250,7 @@ class ContextSearch extends React.Component {
           hintText="Enter Search Query"
           underlineStyle={styles.underline}
           underlineFocusStyle={styles.underlineFocus}
-          style={styles.input}
+          style={styles.overall}
           hintStyle={styles.hint}
           inputStyle={styles.input}
           onEnterKeyDown={this._handleSearchEnter}
@@ -262,10 +273,12 @@ class ContextSearch extends React.Component {
 
 
 ContextSearch.propTypes = {
-  defaultSource: React.PropTypes.string
+  defaultSource: React.PropTypes.string,
+  customStyles: React.PropTypes.object
 };
 
 ContextSearch.defaultProps = {
+  customStyles: {}
 };
 
 export default ContextSearch;
