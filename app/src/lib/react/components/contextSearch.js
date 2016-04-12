@@ -69,7 +69,7 @@ class ContextSearch extends React.Component {
     } else {
       //if not chimera search, redirect to corius search
       if (this.props.defaultSource !== 'search') {
-        window.location.href=`${config.searchEndpoint}?searchTerm=${query}&sources=${selectedSrc}`;
+        window.location.href=`${config.searchEndpoint}?searchTerm=${query}&index=${selectedSrc}`;
       } else {
         Dispatcher.publish('performHeaderSearch', data);
       }
@@ -146,8 +146,12 @@ class ContextSearch extends React.Component {
       selectedItems: {
         color: Colors.grey900
       },
+      allSourcesLabel: {
+        paddingLeft: 45
+      },
       menuBorder: {
-        borderBottom: '1px solid #f5f5f5'
+        borderBottom: '1px solid #f5f5f5',
+        paddingLeft: 45
       }
     };
 
@@ -175,11 +179,8 @@ class ContextSearch extends React.Component {
             <MenuItem
               key='search'
               value='search'
-              primaryText={
-                <div style={{paddingLeft: '20px'}}>
-                  <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>all_out</FontIcon> Search All Chimera
-                </div>
-              }
+              style={styles.allSourcesLabel}
+              primaryText='Search All Chimera'
               leftCheckbox={
                 <Checkbox
                   style={{top: '5px'}}
@@ -200,11 +201,7 @@ class ContextSearch extends React.Component {
                     key={s.id}
                     value={s.id}
                     style={styles.menuBorder}
-                    primaryText={
-                      <div style={{paddingLeft: '20px'}}>
-                        <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>{s.style.iconClassName}</FontIcon> {s.name}
-                      </div>
-                    }
+                    primaryText={s.name}
                     leftCheckbox={
                       <Checkbox
                         style={{top: '5px'}}
@@ -226,11 +223,7 @@ class ContextSearch extends React.Component {
                     key={s.id}
                     value={s.id}
                     style={styles.menuBorder}
-                    primaryText={
-                      <div style={{paddingLeft: '20px'}}>
-                        <FontIcon className='material-icons' style={{verticalAlign: 'middle'}}>{s.style.iconClassName}</FontIcon> {s.name}
-                      </div>
-                    }
+                    primaryText={s.name}
                     leftCheckbox={
                       <Checkbox
                         style={{top: '5px'}}
