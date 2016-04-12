@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Header from 'lib/react/components/header';
-import appConfig from 'appConfig';
+import appConfig from './appConfig';
 
 import acmMocks from './lib/mocks/acmMocks';
 import userMock from './lib/mocks/userMock';
