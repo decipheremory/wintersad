@@ -64,17 +64,18 @@ class ContextSearch extends React.Component {
       sources: selectedSrc
     };
 
-   if (config.useLegacySearch) {
-      //if not chimera search, redirect to legacy
+    if (config.useLegacySearch) {
+      window.location.href = `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`;
+    } else {
+      //if not chimera search, redirect to corius search
       if (this.props.defaultSource !== 'search') {
-        window.location.href = `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`;
+        window.location.href=`${config.searchEndpoint}?searchTerm=${query}&sources=${selectedSrc}`;
       } else {
         Dispatcher.publish('performHeaderSearch', data);
       }
-    } else {
-        Dispatcher.publish('performHeaderSearch', data);
     }
   }
+
 
   _handleAllChecked(e, checked) {  
     if (checked) {
