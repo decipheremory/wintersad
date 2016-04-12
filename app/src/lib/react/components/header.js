@@ -97,11 +97,11 @@ class Header extends React.Component {
               {user &&
                 <span style={styles.userDisplay}>{this._getUserDisplayName()}</span>
               }
+              <UserProfile profileUrl={profileUrl} />
               {user.exports &&
                 <UserExport exports={exports} />
               }
-              <UserNotification user={user} messages={messages}/>
-              <UserProfile profileUrl={profileUrl} />
+              <UserNotification user={user} messages={messages}/>         
             </span>
           }
         >
