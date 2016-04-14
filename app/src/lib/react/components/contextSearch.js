@@ -28,7 +28,11 @@ class ContextSearch extends React.Component {
     this._onSourcesUpdate = this._onSourcesUpdate.bind(this);
     this._handleAllChecked = this._handleAllChecked.bind(this);
     this._handleCheck = this._handleCheck.bind(this);
+    this._onDataSourcesChanged = this._onDataSourcesChanged.bind(this);
+    this._onPopulateNewQueryData = this._onPopulateNewQueryData.bind(this);
     Dispatcher.subscribe('searchSourcesUpdated', this._onSourcesUpdate.bind(this));
+    Dispatcher.subscribe('dataSourcesChanged', this._onDataSourcesChanged.bind(this));
+    Dispatcher.subscribe('populateNewQueryData', this._onPopulateNewQueryData.bind(this));
   }
 
   componentWillMount() {
@@ -44,9 +48,19 @@ class ContextSearch extends React.Component {
 
     this.setState({
       sources: eventObj.data,
-      allSources: sourceNameArr,
-      checkedArray: this.state.valueMultiple
+      allSources: sourceNameArr
     });
+
+     //default to all sources for chimera search; don't send in a non datasource
+    if (sourceNameArr.indexOf(this.props.defaultSource === -1)) {
+      this.setState({
+        checkedArray: []
+      });
+    }   else  {
+      this.setState({
+        checkedArray: this.state.valueMultiple
+      });
+    }
 
     //default to all sources for chimera search
     if (this.state.valueMultiple.indexOf('search') !== -1) {
@@ -54,6 +68,16 @@ class ContextSearch extends React.Component {
         checkedArray: sourceNameArr
       });
     }
+  }
+
+    _onDataSourcesChanged(eventObj) {
+      this.setState({
+        checkedArray: eventObj.data
+      });
+    }
+
+  _onPopulateNewQueryData(eventObj) {
+    this.refs.contextSearchField.setValue(eventObj.data);
   }
 
   _handleSearchEnter() {
@@ -69,7 +93,7 @@ class ContextSearch extends React.Component {
     } else {
       //if not chimera search, redirect to corius search
       if (this.props.defaultSource !== 'search') {
-        window.location.href=`${config.searchEndpoint}?searchTerm=${query}&index=${selectedSrc}`;
+        window.location.href=`${config.searchEndpoint}?query=${query}&index=${selectedSrc}`;
       } else {
         Dispatcher.publish('performHeaderSearch', data);
       }
