@@ -152,6 +152,10 @@ class ContextSearch extends React.Component {
       menuBorder: {
         borderBottom: '1px solid #f5f5f5',
         paddingLeft: 45
+      },
+      iconColor: {
+        search: Colors.white,
+        help: 'light'
       }
     };
 
@@ -167,7 +171,7 @@ class ContextSearch extends React.Component {
           desktop={true}
           iconButtonElement={
             <IconButton style={styles.icon}>
-              <FontIcon className="material-icons" color={Colors.white}>search</FontIcon>
+              <FontIcon className="material-icons" color={styles.iconColor.search}>search</FontIcon>
             </IconButton>
           }
           anchorOrigin={styles.anchorOrigin}
@@ -255,7 +259,12 @@ class ContextSearch extends React.Component {
           tooltip="Search Help"
           style={styles.icon}
         >
-          <img src={'./lib/img/help.png'} />
+          {styles.iconColor.help == 'light' &&
+            <img src={'./lib/img/help_light.png'} />
+          }
+          {styles.iconColor.help == 'dark' &&
+            <img src={'./lib/img/help_dark.png'} />
+          }
         </IconButton>
         </a>
 
