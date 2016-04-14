@@ -29,7 +29,7 @@ class AppIcon extends React.Component {
     };
     return(
       <li>
-        <a href={appItem.url}>
+        <a href={appItem.url} target={appItem.target}>
           <i style={styles.li} className={appItem.icon}>
             <br /><label style={styles.label}>{appItem.title}</label></i>
         </a>

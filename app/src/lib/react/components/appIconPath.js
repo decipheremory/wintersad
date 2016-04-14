@@ -36,7 +36,7 @@ class AppIconPath extends React.Component {
     };
     return(
       <li>
-        <a href={appItem.url}>
+        <a href={appItem.url} target={appItem.target}>
           <i style={styles.li}>
             <img style={styles.icon} src={appItem.iconPath} />
             <br /><label style={styles.label}>{appItem.title}</label>
