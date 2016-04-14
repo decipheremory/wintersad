@@ -60,13 +60,15 @@ class AppTray extends React.Component {
   _renderApps(appId, apps, appType) {
     return apps.map(function(app, index) {
       if((app.apptype === appType) && (app.id !== appId)) {
+        let target = app.newTab ? '_blank' : '';
         // if appTrayIconPath exists, load the iconPath component
         if(app.appTrayIconPath.trim() !== '') {
           return (
             <AppIconPath key={index} appItem={{
               title: app.title,
               url: app.url,
-              iconPath: app.appTrayIconPath
+              iconPath: app.appTrayIconPath,
+              target: target
             }} />
           );
         } else {
@@ -74,7 +76,8 @@ class AppTray extends React.Component {
             <AppIcon key={index} appItem={{
               title: app.title,
               url: app.url,
-              icon: app.icon
+              icon: app.icon,
+              target: target
             }} />
           );
         }
