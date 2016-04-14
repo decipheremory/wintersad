@@ -71,9 +71,8 @@ class ContextSearch extends React.Component {
   }
 
     _onDataSourcesChanged(eventObj) {
-      var tempDataSources = eventObj.data;
       this.setState({
-        checkedArray: tempDataSources
+        checkedArray: eventObj.data
       });
     }
 
