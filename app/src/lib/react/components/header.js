@@ -33,7 +33,15 @@ class Header extends React.Component {
     const { user } = this.props;
     let middleInitial = user.middleInitial ? user.middleInitial : '';
     if(user) {
-      return user.firstName + ' ' + middleInitial + ' ' + user.lastName;
+      let displayName = '';
+      if(user.firstName) {
+        displayName += user.firstName;
+      }
+      displayName += ' ' + middleInitial;
+      if(user.lastName) {
+        displayName += ' ' + user.lastName;
+      }
+      return displayName;
     } else {
       return '';
     }
