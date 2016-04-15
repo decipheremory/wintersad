@@ -180,13 +180,29 @@ class ContextSearch extends React.Component {
       iconColor: {
         search: Colors.white,
         help: 'light'
+      },
+      textFieldProp: {
+        underlineShow: true
+      },
+      searchIcons: {
+        paddingTop: 0,
+        paddingRight: 0,
+        paddingBottom: 0,
+        paddingLeft: 0,
+        width: 24,
+        height: 24
+      },
+      helpIcons: {
+        paddingTop: 0,
+        paddingRight: 0,
+        paddingBottom: 0,
+        paddingLeft: 0,
+        width: 24,
+        height: 24
       }
     };
 
     const styles = _.assign({}, defaultStyles, customStyles);
-
-
-
     const helpPageUrl = `${config.csxProxySearchHelpEndpoint}`;
 
     return(
@@ -194,7 +210,7 @@ class ContextSearch extends React.Component {
         <IconMenu
           desktop={true}
           iconButtonElement={
-            <IconButton style={styles.icon}>
+            <IconButton style={styles.searchIcons}>
               <FontIcon className="material-icons" color={styles.iconColor.search}>search</FontIcon>
             </IconButton>
           }
@@ -204,72 +220,72 @@ class ContextSearch extends React.Component {
           selectedMenuItemStyle={styles.selectedItems}
         >
 
-            <MenuItem
-              key='search'
-              value='search'
-              style={styles.allSourcesLabel}
-              primaryText='Search All Chimera'
-              leftCheckbox={
-                <Checkbox
-                  style={{top: '5px'}}
-                  checked={this.state.checkedArray.length  === this.state.allSources.length}
-                  onCheck={this._handleAllChecked}
-                  iconStyle={{
-                    fill: '#333'
-                  }}/>
-              }/>
+          <MenuItem
+            key='search'
+            value='search'
+            style={styles.allSourcesLabel}
+            primaryText='Search All Chimera'
+            leftCheckbox={
+              <Checkbox
+                style={{top: '5px'}}
+                checked={this.state.checkedArray.length  === this.state.allSources.length}
+                onCheck={this._handleAllChecked}
+                iconStyle={{
+                  fill: '#333'
+                }}/>
+            }/>
 
-            <div style={styles.sourceTypeLabel}>Internal Data</div>
-            {
-              this.state.sources.filter((s) => s.internal).map((s) => {
+          <div style={styles.sourceTypeLabel}>Internal Data</div>
+          {
+            this.state.sources.filter((s) => s.internal).map((s) => {
 
-                return (
+              return (
 
-                  <MenuItem
-                    key={s.id}
-                    value={s.id}
-                    style={styles.menuBorder}
-                    primaryText={s.name}
-                    leftCheckbox={
-                      <Checkbox
-                        style={{top: '5px'}}
-                        checked={this.state.checkedArray.indexOf(s.id) !== -1}
-                        onCheck={(e, checked) => this._handleCheck(s, checked)}
-                        iconStyle={{
-                          fill: '#333'
-                        }}/>
-                    }/>
-                );
-              })
-            }
+                <MenuItem
+                  key={s.id}
+                  value={s.id}
+                  style={styles.menuBorder}
+                  primaryText={s.name}
+                  leftCheckbox={
+                    <Checkbox
+                      style={{top: '5px'}}
+                      checked={this.state.checkedArray.indexOf(s.id) !== -1}
+                      onCheck={(e, checked) => this._handleCheck(s, checked)}
+                      iconStyle={{
+                        fill: '#333'
+                      }}/>
+                  }/>
+              );
+            })
+          }
 
-            <div style={styles.sourceTypeLabel}>External Data</div>
-            {
-              this.state.sources.filter((s) => !s.internal).map((s) => {
-                return (
-                  <MenuItem
-                    key={s.id}
-                    value={s.id}
-                    style={styles.menuBorder}
-                    primaryText={s.name}
-                    leftCheckbox={
-                      <Checkbox
-                        style={{top: '5px'}}
-                        checked={this.state.checkedArray.indexOf(s.id) !== -1}
-                        onCheck={(e, checked) => this._handleCheck(s, checked)}
-                        iconStyle={{
-                          fill: '#333'
-                        }}/>
-                 }/>
-                );
-              })
-            }
-          </IconMenu>
-
+          <div style={styles.sourceTypeLabel}>External Data</div>
+          {
+            this.state.sources.filter((s) => !s.internal).map((s) => {
+              return (
+                <MenuItem
+                  key={s.id}
+                  value={s.id}
+                  style={styles.menuBorder}
+                  primaryText={s.name}
+                  leftCheckbox={
+                    <Checkbox
+                      style={{top: '5px'}}
+                      checked={this.state.checkedArray.indexOf(s.id) !== -1}
+                      onCheck={(e, checked) => this._handleCheck(s, checked)}
+                      iconStyle={{
+                        fill: '#333'
+                      }}/>
+               }/>
+              );
+            })
+          }
+        </IconMenu>
 
         <TextField
           hintText="Enter Search Query"
           underlineStyle={styles.underline}
+          underlineShow={styles.textFieldProp.underlineShow}
           underlineFocusStyle={styles.underlineFocus}
           style={styles.overall}
           hintStyle={styles.hint}
@@ -279,19 +295,18 @@ class ContextSearch extends React.Component {
         />
 
         <a href={helpPageUrl} target="_blank">
-        <IconButton
-          tooltip="Search Help"
-          style={styles.icon}
-        >
-          {styles.iconColor.help == 'light' &&
-            <img src={'./lib/img/help_light.png'} />
-          }
-          {styles.iconColor.help == 'dark' &&
-            <img src={'./lib/img/help_dark.png'} />
-          }
-        </IconButton>
+          <IconButton
+            tooltip="Search Help"
+            style={styles.helpIcons}
+          >
+            {styles.iconColor.help == 'light' &&
+              <img src={'./lib/img/help_light.png'} />
+            }
+            {styles.iconColor.help == 'dark' &&
+              <img src={'./lib/img/help_dark.png'} />
+            }
+          </IconButton>
         </a>
-
       </div>
     );
   }
