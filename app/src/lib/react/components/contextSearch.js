@@ -21,18 +21,18 @@ class ContextSearch extends React.Component {
       sources: [],
       valueMultiple: [this.props.defaultSource],
       allSources: [] ,
-      checkedArray: []
+      checkedArray: [],
+      searchTerm: ''
     };
 
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
     this._onSourcesUpdate = this._onSourcesUpdate.bind(this);
     this._handleAllChecked = this._handleAllChecked.bind(this);
     this._handleCheck = this._handleCheck.bind(this);
-    this._onDataSourcesChanged = this._onDataSourcesChanged.bind(this);
-    this._onPopulateNewQueryData = this._onPopulateNewQueryData.bind(this);
+    this._onUpdateSearchTerm = this._onUpdateSearchTerm.bind(this);
+    this._onSearchPageFilterChanged = this._onSearchPageFilterChanged.bind(this);
     Dispatcher.subscribe('searchSourcesUpdated', this._onSourcesUpdate.bind(this));
-    Dispatcher.subscribe('dataSourcesChanged', this._onDataSourcesChanged.bind(this));
-    Dispatcher.subscribe('populateNewQueryData', this._onPopulateNewQueryData.bind(this));
+    Dispatcher.subscribe('searchPageFilterChanged', this._onSearchPageFilterChanged.bind(this));
   }
 
   componentWillMount() {
@@ -42,7 +42,7 @@ class ContextSearch extends React.Component {
   _onSourcesUpdate(eventObj) {
     var tempSources = eventObj.data;
     var sourceNameArr = [];
-    tempSources.map(function(src, index) {
+    tempSources.map(function(src) {
       sourceNameArr.push(src.id);
     });
 
@@ -51,7 +51,7 @@ class ContextSearch extends React.Component {
       allSources: sourceNameArr
     });
 
-     //default to all sources for chimera search; don't send in a non datasource
+     // don't send in a non datasource
     if (sourceNameArr.indexOf(this.props.defaultSource === -1)) {
       this.setState({
         checkedArray: []
@@ -70,19 +70,22 @@ class ContextSearch extends React.Component {
     }
   }
 
-    _onDataSourcesChanged(eventObj) {
-      this.setState({
-        checkedArray: eventObj.data
-      });
-    }
+  _onSearchPageFilterChanged(eventObj) {
+    this.setState({
+      checkedArray: eventObj.data.sources,
+      searchTerm: eventObj.data.searchTerm
+    });
+  }
 
-  _onPopulateNewQueryData(eventObj) {
-    this.refs.contextSearchField.setValue(eventObj.data);
+  _onUpdateSearchTerm(e) {
+    this.setState({
+      searchTerm: e.target.value
+    });
   }
 
   _handleSearchEnter() {
     let selectedSrc = this.state.checkedArray;
-    let query = this.refs.contextSearchField.getValue();
+    let query = this.state.searchTerm; 
     const data = {
       searchTerm: query,
       sources: selectedSrc
@@ -291,7 +294,8 @@ class ContextSearch extends React.Component {
           hintStyle={styles.hint}
           inputStyle={styles.input}
           onEnterKeyDown={this._handleSearchEnter}
-          ref='contextSearchField'
+          onChange={this._onUpdateSearchTerm}
+          value={this.state.searchTerm}
         />
 
         <a href={helpPageUrl} target="_blank">
