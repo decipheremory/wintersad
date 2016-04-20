@@ -63,7 +63,7 @@ class ContextSearch extends React.Component {
     }
 
     //default to all sources for chimera search
-    if (this.state.valueMultiple.indexOf('search') !== -1) {
+    if (this.state.valueMultiple.indexOf('search') !== -1 || this.state.valueMultiple.indexOf('chm_home') !== -1) {
       this.setState({
         checkedArray: sourceNameArr
       });
