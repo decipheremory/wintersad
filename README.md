@@ -116,7 +116,13 @@ Add the following properties to your **appConfig.js** configuration file.
 ```js
 export default {
   userProfileEndpoint: 'https://chm.363-283.io/apps/userprofile/',
-  appId: 'standalone-header'
+  appId: 'standalone-header',
+  capco: {
+    systemLow: {
+      banner: 'UNCLASSIFIED',
+      classif: 'U'
+    }
+  }
 };
 ```
 
@@ -135,10 +141,12 @@ class Main extends React.Component {
     return (
       <div>
         <Header
-          user={this.props.user}
+          user={userMock.user}
+          messages={userMock.messages}
           profileUrl={appConfig.userProfileEndpoint}
           appId={appConfig.appId}
-        />
+          rollupAcm={acmMocks.unclassified}
+        />        
       </div>
     );
   }
@@ -147,11 +155,13 @@ class Main extends React.Component {
 
 The Header module requires a few props. Below are brief explanation as to what they are and their usage.
 
-* **user** User auth object.
+* **appId** Application id. Please set this within the appConfig.js file as a configurable prop. Application id should be in the conventions of `[org]_[app name]`. For example, `chm_home` for Chimera Home micro app.
+* **messages** User message object. Your application is responsible for passing in the appropriate message/notification object. This typically is handled by Corius and is part of the original user object.
 * **profileUrl** User Profile URL Endpoint. Please set this within the appConfig.js file as a configurable prop.
-* **appId** Application id. Please set this within the appConfig.js file as a configurable prop.
+* **rollupAcm** Rolled up ACM object used to be rendered by the classification banner. Your application is responsible for passing in the appropriate rollup acm to the header. The initial should be default app system low. Example of integration pattern can be found further down.
 * **searchDisabled** [Optional] Default to false. Changing the boolean to {true} will hide the contextual search component within the header.
 * **toolbarDisabled** [Optional] Default to false. Changing the boolean to {true} will hide the secondary toolbar below the header.
+* **user** User auth object. Your application is responsible for passing in the appropriate user authentication object handled by Corius authentication process.
 
 ### Integrating to Angular Based Applications
 Below is an demonstration example of how you would integrate the header to your Angular based application. Because the Header module is natively
@@ -315,6 +325,21 @@ Next, add the following app container within `src/index.html`.
 
 ```html
 <div id="app"></div>
+```
+
+## Nginx Integration
+
+The header module provides the capabilities to reactively render icons based upon the data provided by the app service. Header supports reactively rendering FontAwesome icons based upon data driven class names. You can also provide/specify your own custom icons. The custom
+icons will need to be moved to the appropriate static route served by Nginx. Below is snippet integration for local development purposes.
+
+### Move the static custom app icons to your local Nginx server
+
+**Note:** Integration pattern published below is within the OSX local development environment. Depending on your local development environment and operating system, your Nginx location could be different.
+
+```bash
+# From your app root level
+mkdir -p /usr/local/var/www/static/images
+cp static/images/* /usr/local/var/www/static/images
 ```
 
 ## Contribute
