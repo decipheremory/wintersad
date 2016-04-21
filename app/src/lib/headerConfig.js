@@ -3,7 +3,7 @@ export default {
   bsxServiceEndpoint: '/service/csx/proxy/1.1',
   searchEndpoint: '/apps/search/',
   csxProxyEndpoint: 'https://chm.363-283.io/material/#/chimera-search/search',
-  csxProxySearchHelpEndpoint: 'https://chm.363-283.io/material/#/help/chimerasearch',
+  csxProxySearchHelpEndpoint: '/apps/search/help',
   useLegacySearch: false,
   requestTimeout: 15000
 };
