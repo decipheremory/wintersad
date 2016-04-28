@@ -78,7 +78,6 @@
   },
   "jspmNodeConversion": false,
   "jspm": {
-    "jspmNodeConversion": false,
     "directories": {
       "baseURL": "app",
       "test": "test"

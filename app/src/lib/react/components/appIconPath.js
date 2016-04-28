@@ -22,7 +22,7 @@ class AppIconPath extends React.Component {
         height: 80,
         width: 120,
         marginTop: 5,
-        marginBottom: 5,
+        // marginBottom: 5,
         paddingTop: 10,
         paddingBottom: 10,
         textAlign: 'center',
