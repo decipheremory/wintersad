@@ -1,8 +1,9 @@
 // headerMgr.js
 
 import dispatcher from '../api/dispatcher';
-import {getApps} from '../api/apps';
+import { getApps, getApp} from '../api/apps';
 import {getBsxSources} from '../api/bsxSources';
+import _ from 'lodash';
 
 var headerMgr = {
 
@@ -10,6 +11,20 @@ var headerMgr = {
     getApps()
       .then(function(results) {
         dispatcher.publish('appsUpdated', results.apps);
+      })
+      .catch(error => {
+        let errMsg = '';
+        if(error.json) {
+          error.json.errors.map(err => { errMsg += ` ${err.message}`; });
+        }
+      });
+  },
+
+  fetchApp: function(appId) {
+    getApp(appId)
+      .then(function(results) {
+        // setting the appData to sessionStorage.
+        sessionStorage.setItem(appId, JSON.stringify(_.first(results.apps)));
       })
       .catch(error => {
         let errMsg = '';

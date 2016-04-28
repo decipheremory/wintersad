@@ -7,7 +7,7 @@ import appConfig from './appConfig';
 import acmMocks from './lib/mocks/acmMocks';
 import userMock from './lib/mocks/userMock';
 
-const App = React.createClass({
+const App = React.createClass({  
   render() {
     return (
       <div>

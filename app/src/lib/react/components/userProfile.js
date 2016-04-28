@@ -31,7 +31,7 @@ class UserProfile extends React.Component {
         paddingBottom: 10,
         paddingLeft: 0,
         display: 'block'
-      },
+      }
     };
 
     return(
