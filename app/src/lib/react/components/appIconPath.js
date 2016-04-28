@@ -22,7 +22,6 @@ class AppIconPath extends React.Component {
         height: 80,
         width: 120,
         marginTop: 5,
-        // marginBottom: 5,
         paddingTop: 10,
         paddingBottom: 10,
         textAlign: 'center',
@@ -30,7 +29,7 @@ class AppIconPath extends React.Component {
       },
       icon: {
         height: 42,
-        weight: 42,
+        width: 42,
         marginBottom: 5
       }
     };
@@ -38,7 +37,7 @@ class AppIconPath extends React.Component {
       <li>
         <a href={appItem.url} target={appItem.target}>
           <i style={styles.li}>
-            <img style={styles.icon} src={appItem.iconPath} />
+            <img style={styles.icon} src={appItem.iconPath} height={styles.icon.height} width={styles.icon.width}/>
             <br /><label style={styles.label}>{appItem.title}</label>
           </i>
         </a>
