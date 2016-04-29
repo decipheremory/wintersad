@@ -22,7 +22,8 @@ export default class RollupBanner extends React.Component {
                 textAlign: 'center',
                 width: '100%',
                 fontWeight: 100,
-                fontFamily: 'Roboto, sans-serif'
+                // fontFamily: 'Roboto, sans-serif'
+                fontFamily: 'sans-serif'
               }}
           >
             <span>

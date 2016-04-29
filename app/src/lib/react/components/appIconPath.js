@@ -15,7 +15,8 @@ class AppIconPath extends React.Component {
         fontSize: 12,
         fontStyle: 'normal',
         textAlign: 'center',
-        fontFamily: 'robotolight, Helvetica Neue, Helvetica, Arial, sans-serif'
+        // fontFamily: 'robotolight, Helvetica Neue, Helvetica, Arial, sans-serif'
+        fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif'
       },
       li: {
         float: 'left',

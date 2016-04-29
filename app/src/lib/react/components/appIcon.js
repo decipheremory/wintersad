@@ -13,7 +13,8 @@ class AppIcon extends React.Component {
     const styles = {
       label: {
         fontSize: 12,
-        fontFamily: 'robotolight, Helvetica Neue, Helvetica, Arial, sans-serif'
+        // fontFamily: 'robotolight, Helvetica Neue, Helvetica, Arial, sans-serif'
+        fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif'
       },
       li: {
         float: 'left',

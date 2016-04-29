@@ -58,7 +58,8 @@ class Header extends React.Component {
 
     const styles = {
       header: {
-        fontFamily: 'Roboto, sans-serif',
+        // fontFamily: 'Roboto, sans-serif',
+        fontFamily: 'sans-serif',
         fontWeight: 100,
         backgroundColor: '#444',
         height: 55
@@ -80,7 +81,8 @@ class Header extends React.Component {
       },
       title: {
         display: 'inline-block',
-        fontFamily: 'Roboto, sans-serif',
+        // fontFamily: 'Roboto, sans-serif',
+        fontFamily: 'sans-serif',
         fontWeight: 100
       },
       toolbarTitle: {
