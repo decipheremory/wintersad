@@ -248,7 +248,7 @@ class ContextSearch extends React.Component {
                   key={s.id}
                   value={s.id}
                   style={styles.menuBorder}
-                  primaryText={s.name}
+                  primaryText={s.displayName}
                   leftCheckbox={
                     <Checkbox
                       style={{top: '5px'}}
@@ -270,7 +270,7 @@ class ContextSearch extends React.Component {
                   key={s.id}
                   value={s.id}
                   style={styles.menuBorder}
-                  primaryText={s.name}
+                  primaryText={s.displayName}
                   leftCheckbox={
                     <Checkbox
                       style={{top: '5px'}}
