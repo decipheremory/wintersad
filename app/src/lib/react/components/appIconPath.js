@@ -15,14 +15,14 @@ class AppIconPath extends React.Component {
         fontSize: 12,
         fontStyle: 'normal',
         textAlign: 'center',
-        // fontFamily: 'robotolight, Helvetica Neue, Helvetica, Arial, sans-serif'
-        fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif'
+        fontFamily: 'sans-serif'
       },
       li: {
         float: 'left',
         height: 80,
         width: 120,
         marginTop: 5,
+        marginBottom: 5,
         paddingTop: 10,
         paddingBottom: 10,
         textAlign: 'center',
