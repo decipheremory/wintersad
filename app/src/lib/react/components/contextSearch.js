@@ -22,7 +22,9 @@ class ContextSearch extends React.Component {
       valueMultiple: [this.props.defaultSource],
       allSources: [] ,
       checkedArray: [],
-      searchTerm: ''
+      searchTerm: '',
+      showServiceOffline: 'none',
+      sourceLabelVisibility: 'block'
     };
 
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
@@ -31,8 +33,11 @@ class ContextSearch extends React.Component {
     this._handleCheck = this._handleCheck.bind(this);
     this._onUpdateSearchTerm = this._onUpdateSearchTerm.bind(this);
     this._onSearchPageFilterChanged = this._onSearchPageFilterChanged.bind(this);
+    this._onSetOfflineMessage = this._onSetOfflineMessage.bind(this);
     Dispatcher.subscribe('searchSourcesUpdated', this._onSourcesUpdate.bind(this));
     Dispatcher.subscribe('searchPageFilterChanged', this._onSearchPageFilterChanged.bind(this));
+    Dispatcher.subscribe('searchSourcesNotAvailable', this._onSetOfflineMessage.bind(this));
+
   }
 
   componentWillMount() {
@@ -68,6 +73,13 @@ class ContextSearch extends React.Component {
         checkedArray: sourceNameArr
       });
     }
+  }
+
+  _onSetOfflineMessage() {
+    this.setState({
+      showServiceOffline: 'block',
+      sourceLabelVisibility: 'none'
+    });
   }
 
   _onSearchPageFilterChanged(eventObj) {
@@ -168,13 +180,15 @@ class ContextSearch extends React.Component {
       sourceTypeLabel: {
         marginTop: 5,
         marginLeft: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        display: this.state.sourceLabelVisibility
       },
       selectedItems: {
         color: Colors.grey900
       },
       labelSpacing: {
-        paddingLeft: 45
+        paddingLeft: 45,
+        display: this.state.sourceLabelVisibility
       },
       iconColor: {
         search: Colors.white,
@@ -198,6 +212,10 @@ class ContextSearch extends React.Component {
         paddingLeft: 0,
         width: 24,
         height: 24
+      },
+      offlineMessage: { 
+        fontSize: 20, 
+        padding: 5, display: this.state.showServiceOffline
       }
     };
 
@@ -206,6 +224,7 @@ class ContextSearch extends React.Component {
 
     return(
       <div>
+
         <IconMenu
           desktop={true}
           iconButtonElement={
@@ -218,6 +237,11 @@ class ContextSearch extends React.Component {
           closeOnItemTouchTap={false}
           selectedMenuItemStyle={styles.selectedItems}
         >
+         <div style={styles.offlineMessage}>
+          <span>
+              <i style={styles.label} className="fa fa-info-circle fa-1x"> Search service is currently offline.</i>
+          </span>
+        </div>
 
           <MenuItem
             key='search'
@@ -226,7 +250,7 @@ class ContextSearch extends React.Component {
             primaryText='Search All Chimera'
             leftCheckbox={
               <Checkbox
-                style={{top: '5px'}}
+                style={{top: '5px',  display: this.state.sourceLabelVisibility}}
                 checked={this.state.checkedArray.length  === this.state.allSources.length}
                 onCheck={this._handleAllChecked}
                 iconStyle={{
@@ -234,7 +258,7 @@ class ContextSearch extends React.Component {
                 }}/>
             }/>
 
-          <div style={styles.sourceTypeLabel}>Internal Data</div>
+          <div style={styles.sourceTypeLabel}>Internal Data</div> 
           {
             this.state.sources.filter((s) => s.internal).map((s) => {
 
@@ -258,7 +282,7 @@ class ContextSearch extends React.Component {
             })
           }
 
-          <div style={styles.sourceTypeLabel}>External Data</div>
+         <div style={styles.sourceTypeLabel}>External Data</div> 
           {
             this.state.sources.filter((s) => !s.internal).map((s) => {
               return (
