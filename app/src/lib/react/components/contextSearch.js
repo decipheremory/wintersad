@@ -62,8 +62,8 @@ class ContextSearch extends React.Component {
       });
     }
 
-    //default to all sources for chimera search
-    if (this.state.valueMultiple.indexOf('search') !== -1 || this.state.valueMultiple.indexOf('chm_home') !== -1) {
+    //default to all sources for chimera search or chimera home
+    if (this.state.valueMultiple.indexOf('chm_search') !== -1 || this.state.valueMultiple.indexOf('chm_home') !== -1) {
       this.setState({
         checkedArray: sourceNameArr
       });
@@ -95,7 +95,7 @@ class ContextSearch extends React.Component {
       window.location.href = `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`;
     } else {
       //if not chimera search, redirect to corius search
-      if (this.props.defaultSource !== 'search') {
+      if (this.props.defaultSource !== 'chm_search') {
         window.location.href=`${config.searchEndpoint}?query=${query}&index=${selectedSrc}`;
       } else {
         Dispatcher.publish('performHeaderSearch', data);
@@ -166,18 +166,14 @@ class ContextSearch extends React.Component {
         vertical: 'top'
       },
       sourceTypeLabel: {
-        fontSize: 'small',
-        marginLeft: 10,
-        color: Colors.grey700
+        marginTop: 5,
+        marginLeft: 20,
+        fontWeight: 'bold'
       },
       selectedItems: {
         color: Colors.grey900
       },
-      allSourcesLabel: {
-        paddingLeft: 45
-      },
-      menuBorder: {
-        borderBottom: '1px solid #f5f5f5',
+      labelSpacing: {
         paddingLeft: 45
       },
       iconColor: {
@@ -226,7 +222,7 @@ class ContextSearch extends React.Component {
           <MenuItem
             key='search'
             value='search'
-            style={styles.allSourcesLabel}
+            style={styles.labelSpacing}
             primaryText='Search All Chimera'
             leftCheckbox={
               <Checkbox
@@ -247,7 +243,7 @@ class ContextSearch extends React.Component {
                 <MenuItem
                   key={s.id}
                   value={s.id}
-                  style={styles.menuBorder}
+                  style={styles.labelSpacing}
                   primaryText={s.displayName}
                   leftCheckbox={
                     <Checkbox
@@ -269,7 +265,7 @@ class ContextSearch extends React.Component {
                 <MenuItem
                   key={s.id}
                   value={s.id}
-                  style={styles.menuBorder}
+                  style={styles.labelSpacing}
                   primaryText={s.displayName}
                   leftCheckbox={
                     <Checkbox
