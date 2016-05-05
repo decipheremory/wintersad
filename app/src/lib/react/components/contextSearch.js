@@ -22,7 +22,9 @@ class ContextSearch extends React.Component {
       valueMultiple: [this.props.defaultSource],
       allSources: [] ,
       checkedArray: [],
-      searchTerm: ''
+      searchTerm: '',
+      showServiceOffline: 'none',
+      sourceLabelVisibility: 'block'
     };
 
     this._handleSearchEnter = this._handleSearchEnter.bind(this);
@@ -31,8 +33,11 @@ class ContextSearch extends React.Component {
     this._handleCheck = this._handleCheck.bind(this);
     this._onUpdateSearchTerm = this._onUpdateSearchTerm.bind(this);
     this._onSearchPageFilterChanged = this._onSearchPageFilterChanged.bind(this);
+    this._onSetOfflineMessage = this._onSetOfflineMessage.bind(this);
     Dispatcher.subscribe('searchSourcesUpdated', this._onSourcesUpdate.bind(this));
     Dispatcher.subscribe('searchPageFilterChanged', this._onSearchPageFilterChanged.bind(this));
+    Dispatcher.subscribe('searchSourcesNotAvailable', this._onSetOfflineMessage.bind(this));
+
   }
 
   componentWillMount() {
@@ -62,12 +67,19 @@ class ContextSearch extends React.Component {
       });
     }
 
-    //default to all sources for chimera search
-    if (this.state.valueMultiple.indexOf('search') !== -1 || this.state.valueMultiple.indexOf('chm_home') !== -1) {
+    //default to all sources for chimera search or chimera home
+    if (this.state.valueMultiple.indexOf('chm_search') !== -1 || this.state.valueMultiple.indexOf('chm_home') !== -1) {
       this.setState({
         checkedArray: sourceNameArr
       });
     }
+  }
+
+  _onSetOfflineMessage() {
+    this.setState({
+      showServiceOffline: 'block',
+      sourceLabelVisibility: 'none'
+    });
   }
 
   _onSearchPageFilterChanged(eventObj) {
@@ -95,7 +107,7 @@ class ContextSearch extends React.Component {
       window.location.href = `${config.csxProxyEndpoint}?query=${query}&index=${selectedSrc}`;
     } else {
       //if not chimera search, redirect to corius search
-      if (this.props.defaultSource !== 'search') {
+      if (this.props.defaultSource !== 'chm_search') {
         window.location.href=`${config.searchEndpoint}?query=${query}&index=${selectedSrc}`;
       } else {
         Dispatcher.publish('performHeaderSearch', data);
@@ -166,19 +178,17 @@ class ContextSearch extends React.Component {
         vertical: 'top'
       },
       sourceTypeLabel: {
-        fontSize: 'small',
-        marginLeft: 10,
-        color: Colors.grey700
+        marginTop: 5,
+        marginLeft: 20,
+        fontWeight: 'bold',
+        display: this.state.sourceLabelVisibility
       },
       selectedItems: {
         color: Colors.grey900
       },
-      allSourcesLabel: {
-        paddingLeft: 45
-      },
-      menuBorder: {
-        borderBottom: '1px solid #f5f5f5',
-        paddingLeft: 45
+      labelSpacing: {
+        paddingLeft: 45,
+        display: this.state.sourceLabelVisibility
       },
       iconColor: {
         search: Colors.white,
@@ -202,6 +212,10 @@ class ContextSearch extends React.Component {
         paddingLeft: 0,
         width: 24,
         height: 24
+      },
+      offlineMessage: { 
+        fontSize: 20, 
+        padding: 5, display: this.state.showServiceOffline
       }
     };
 
@@ -210,6 +224,7 @@ class ContextSearch extends React.Component {
 
     return(
       <div>
+
         <IconMenu
           desktop={true}
           iconButtonElement={
@@ -222,15 +237,20 @@ class ContextSearch extends React.Component {
           closeOnItemTouchTap={false}
           selectedMenuItemStyle={styles.selectedItems}
         >
+         <div style={styles.offlineMessage}>
+          <span>
+              <i style={styles.label} className="fa fa-info-circle fa-1x"> Search service is currently offline.</i>
+          </span>
+        </div>
 
           <MenuItem
             key='search'
             value='search'
-            style={styles.allSourcesLabel}
+            style={styles.labelSpacing}
             primaryText='Search All Chimera'
             leftCheckbox={
               <Checkbox
-                style={{top: '5px'}}
+                style={{top: '5px',  display: this.state.sourceLabelVisibility}}
                 checked={this.state.checkedArray.length  === this.state.allSources.length}
                 onCheck={this._handleAllChecked}
                 iconStyle={{
@@ -238,7 +258,7 @@ class ContextSearch extends React.Component {
                 }}/>
             }/>
 
-          <div style={styles.sourceTypeLabel}>Internal Data</div>
+          <div style={styles.sourceTypeLabel}>Internal Data</div> 
           {
             this.state.sources.filter((s) => s.internal).map((s) => {
 
@@ -247,7 +267,7 @@ class ContextSearch extends React.Component {
                 <MenuItem
                   key={s.id}
                   value={s.id}
-                  style={styles.menuBorder}
+                  style={styles.labelSpacing}
                   primaryText={s.displayName}
                   leftCheckbox={
                     <Checkbox
@@ -262,14 +282,14 @@ class ContextSearch extends React.Component {
             })
           }
 
-          <div style={styles.sourceTypeLabel}>External Data</div>
+         <div style={styles.sourceTypeLabel}>External Data</div> 
           {
             this.state.sources.filter((s) => !s.internal).map((s) => {
               return (
                 <MenuItem
                   key={s.id}
                   value={s.id}
-                  style={styles.menuBorder}
+                  style={styles.labelSpacing}
                   primaryText={s.displayName}
                   leftCheckbox={
                     <Checkbox

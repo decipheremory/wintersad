@@ -40,11 +40,12 @@ var headerMgr = {
         dispatcher.publish('searchSourcesUpdated', results);
       })
       .catch(error => {
+        dispatcher.publish('searchSourcesNotAvailable', '');      
         let errMsg = '';
         if(error.json) {
+
           error.json.errors.map(err => { errMsg += ` ${err.message}`; });
         }
-        invokeCallback(false, errMsg);
       });
   }
 };
