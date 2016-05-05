@@ -14,7 +14,7 @@ import UserExport from '../components/userExport';
 import UserProfile from '../components/userProfile';
 import UserNotification from '../components/userNotification';
 import RollupBanner from '../components/rollupBanner';
-import HeaderMgr from '../mgrs/headerMgr';
+// import HeaderMgr from '../mgrs/headerMgr';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -27,8 +27,8 @@ class Header extends React.Component {
   }
 
   componentWillMount() {
-    const { appId } = this.props;
-    HeaderMgr.fetchApp(appId);
+    // const { appId } = this.props;
+    // HeaderMgr.fetchApp(appId);
   }
 
   componentDidMount() {
