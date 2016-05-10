@@ -8,6 +8,12 @@ class AppIconPath extends React.Component {
     super(props);
   }
 
+  handleClick(appItem) {
+    if(_paq) {
+      _paq.push(['trackLink', appItem.url, 'link']);
+    }
+  }
+
   render() {
     const { appItem } = this.props;
     const styles = {
@@ -36,7 +42,7 @@ class AppIconPath extends React.Component {
     };
     return(
       <li>
-        <a href={appItem.url} target={appItem.target}>
+        <a href={appItem.url} target={appItem.target} onClick={this.handleClick.bind(this, appItem)}>
           <i style={styles.li}>
             <img style={styles.icon} src={appItem.iconPath} height={styles.icon.height} width={styles.icon.width}/>
             <br /><label style={styles.label}>{appItem.title}</label>

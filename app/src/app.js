@@ -6,11 +6,13 @@ import appConfig from './appConfig';
 
 import acmMocks from './lib/mocks/acmMocks';
 import userMock from './lib/mocks/userMock';
+// let userMock = undefined;
 
-const App = React.createClass({  
+const App = React.createClass({
   render() {
     return (
       <div>
+        {userMock &&
         <Header
           user={userMock.user}
           messages={userMock.messages}
@@ -18,6 +20,7 @@ const App = React.createClass({
           appId={appConfig.appId}
           rollupAcm={acmMocks.unclassified}
         />
+        }
       </div>
     );
   }

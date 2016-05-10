@@ -8,6 +8,12 @@ class AppIcon extends React.Component {
     super(props);
   }
 
+  handleClick(appItem) {
+    if(_paq) {
+      _paq.push(['trackLink', appItem.url, 'link']);
+    }
+  }
+
   render() {
     const { appItem } = this.props;
     const styles = {
@@ -29,7 +35,7 @@ class AppIcon extends React.Component {
     };
     return(
       <li>
-        <a href={appItem.url} target={appItem.target}>
+        <a href={appItem.url} target={appItem.target} onClick={this.handleClick.bind(this, appItem)}>
           <i style={styles.li} className={appItem.icon}>
             <br /><label style={styles.label}>{appItem.title}</label></i>
         </a>

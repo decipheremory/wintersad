@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, minimal-ui, initial-scale=1, user-scalable=no">
     <title>chimera-header-web-ui</title>
     <link rel="stylesheet" href="/lib/icons/materialDesign/material-icons.css">
-    <link rel="stylesheet" href="/lib/icons/fontAwesome/css/font-awesome.min.css">        
+    <link rel="stylesheet" href="/lib/icons/fontAwesome/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -22,5 +22,19 @@
     <script src="jspm_packages/system.js"></script>
     <script src="system.config.js"></script>
     <script>System.import('./app')</script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      (function() {
+        var u="/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
   </body>
 </html>
