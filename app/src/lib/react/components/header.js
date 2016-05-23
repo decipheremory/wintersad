@@ -98,7 +98,7 @@ class Header extends React.Component {
         </div>
         <AppBar
           style={styles.header}
-          title="Chimera"
+          title="Chimera-CHANGED"
           titleStyle={styles.title}
           iconElementLeft={
             <span id='header-app-tray'>
